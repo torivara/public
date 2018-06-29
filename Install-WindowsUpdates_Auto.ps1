@@ -18,4 +18,4 @@ Add-WUServiceManager -ServiceID 7971f918-a847-4430-9279-4a52d1efe18d -Confirm:$f
 
 # Fetch and install updates, automatic reboot
 Write-Output "Fetching and installing updates"
-Get-WUInstall –MicrosoftUpdate –AcceptAll –AutoReboot -Install
+Get-WUInstall –MicrosoftUpdate –AcceptAll –AutoReboot -Install -Verbose
