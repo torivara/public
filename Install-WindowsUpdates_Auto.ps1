@@ -4,7 +4,7 @@
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Confirm:$false | Out-Null
 
 # Make sure repository name PSGallery is trusted
-Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted -Confirm:$false
+Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
 
 # Install Windows Update module from PSGallery
 Install-Module PSWindowsUpdate -Force -Confirm:$false
