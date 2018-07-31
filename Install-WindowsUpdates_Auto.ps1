@@ -1,16 +1,21 @@
 # WARNING! This script will automatically reboot computer if necessary.
 # Use with caution!
 # Install NuGet and suppress confirmation. NuGet needed for Install-Module
-Write-Output "Installing PackageProvider 'NuGet'"
-Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Confirm:$false | Out-Null
+if ((Get-PackageProvider | Where-Object {$_.Name -eq "NuGet"}).Count -eq 0)
+{
+    Write-Output "Installing PackageProvider 'NuGet'"
+    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Confirm:$false | Out-Null
+}
 
 # Make sure repository name PSGallery is trusted
-Write-Output "Setting PSRepository 'PSGallery' to trusted"
-Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
+If ((Get-Module -ListAvailable -Name PSWindowsUpdate).Count -eq 0)
+{
+    Write-Output "Setting PSRepository 'PSGallery' to trusted"
+    Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted -Confirm:$false
 
-# Install Windows Update module from PSGallery
-Write-Output "Installing PowerSell Module 'PSWindowsUpdate' from repository 'PSGallery'"
-Install-Module PSWindowsUpdate -Force -Confirm:$false
+    Write-Output "Installing PowerSell Module 'PSWindowsUpdate' from repository 'PSGallery'"
+    Install-Module PSWindowsUpdate -Force -Confirm:$false
+}
 
 # Add Microsoft Update Service
 Write-Output "Adding 'Microsoft Update' Service to service manager"
