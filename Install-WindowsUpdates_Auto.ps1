@@ -41,6 +41,7 @@ function Get-WIAStatusValue($value)
 $Criteria = "IsInstalled=0 and IsHidden=0 and Type='Software'"
 
 #Update session
+Write-Output "Starting update session."
 $UpdateSession = New-Object -ComObject Microsoft.Update.Session
 
 #Search for relevant updates.
