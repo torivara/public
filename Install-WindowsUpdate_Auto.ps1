@@ -23,10 +23,7 @@
 #>
 
 [CmdletBinding()]
-Param(
-    [Parameter(Mandatory=$False,Position=1)]
-    [Switch]$AutoReboot
-)
+Param()
 
 function Get-WIAStatusValue($value) 
 { 
@@ -106,8 +103,9 @@ If ($UpdateCount -gt 0) {
     }
 
     #Reboot if required by updates.
-    If ($InstallResult.rebootRequired -and $AutoReboot)
+    If ($InstallResult.rebootRequired)
     {
+    	Write-Output "Restarting computer because of updates."
         Restart-Computer -Force -Confirm:$False
     }
 
