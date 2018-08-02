@@ -44,14 +44,14 @@ $Criteria = "IsInstalled=0 and IsHidden=0 and Type='Software'"
 $UpdateSession = New-Object -ComObject Microsoft.Update.Session
 
 #Search for relevant updates.
-Write-Verbose "Searching for updates."
-Write-Verbose "Criteria: $Criteria"
+Write-Output "Searching for updates."
+Write-Output "Criteria: $Criteria"
 $Searcher = $UpdateSession.CreateUpdateSearcher()
 $SearchResult = $Searcher.Search($Criteria).Updates
 
 
 #Install updates.
-Write-Verbose "Preparing for installation."
+Write-Output "Preparing for installation."
 $Installer = New-Object -ComObject Microsoft.Update.Installer
 
 $Counter = 0
@@ -75,14 +75,15 @@ If ($UpdateCount -gt 0) {
         $UpdatesDownloader = $UpdateSession.CreateUpdateDownloader() 
         $UpdatesDownloader.Updates = $UpdatesCollection
         $DownloadResult = $UpdatesDownloader.Download()
-        
-        Write-Output "  - Download {0}" -f (Get-WIAStatusValue $DownloadResult.ResultCode) 
+        $Message = "  - Download {0}" -f (Get-WIAStatusValue $DownloadResult.ResultCode) 
+        Write-Output $Message
 
         #Install update
         $UpdatesInstaller = $UpdateSession.CreateUpdateInstaller()
         $UpdatesInstaller.Updates = $UpdatesCollection 
         $InstallResult = $UpdatesInstaller.Install()
-        Write-Output "  - Install {0}" -f (Get-WIAStatusValue $InstallResult.ResultCode)
+        $Message = "  - Install {0}" -f (Get-WIAStatusValue $InstallResult.ResultCode)
+        Write-Output $Message
 
         If (($InstallResult.ResultCode -eq 2) -or ($InstallResult.ResultCode -eq 3))
         {
@@ -105,7 +106,6 @@ If ($UpdateCount -gt 0) {
     #Reboot if required by updates.
     If ($InstallResult.rebootRequired)
     {
-    	Write-Output "Restarting computer because of updates."
         Restart-Computer -Force -Confirm:$False
     }
 
