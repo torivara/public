@@ -3,13 +3,9 @@
 	Installs windows updates on local computer.
 .DESCRIPTION
 	The script fetches all windows updates available from either Microsoft Update or WSUS (depends on configuration of host), and installs them.
-.PARAMETER AutoRestart
-	If switch is used, the computer will automatically restart when updates are done installing.
-.PARAMETER Criteria
-    Can be used if you need to provide more detailed criteria for Windows Update search.
 .EXAMPLE
     Install all windows updates and restart computer automatically
-	Install-WindowsUpdates.ps1 -AutoRestart
+	Install-WindowsUpdates.ps1
 .INPUTS
 	It is not possible to pipe output to this script.
 .OUTPUTS
@@ -105,9 +101,8 @@ If ($UpdateCount -gt 0) {
     }
 
     #Reboot if required by updates.
-    If ($InstallResult.rebootRequired)
-    {
-        Restart-Computer -Force -Confirm:$False
-    }
+    Write-Host "Restarting computer in 15 seconds. Press CTRL+C if this is not wanted!" -ForegroundColor Red
+    Start-Sleep -Seconds 15
+    Restart-Computer -Force -Confirm:$False
 
 }
