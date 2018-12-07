@@ -34,6 +34,11 @@ function Get-WIAStatusValue($value)
    }  
 }
 
+#Disabling Windows Defender
+Write-Output "Windows Defender is known to slow update progress. Therefore it will be disabled before update install."
+Set-MpPreference -DisableRealtimeMonitoring $true
+If ($?) { Write-Output "Successfully disabled Windows Defender" }
+
 $Criteria = "IsInstalled=0 and IsHidden=0 and Type='Software'"
 
 #Update session
@@ -99,6 +104,11 @@ If ($UpdateCount -gt 0) {
         }
 
     }
+    
+    #Finished installing updates. Enabling Windows Defender.
+    Write-Output "Enabling Windows Defender."
+    Set-MpPreference -DisableRealtimeMonitoring $false
+    If ($?) { Write-Output "Successfully enabled Windows Defender" }
 
     #Reboot if required by updates.
     Write-Host "Restarting computer in 15 seconds. Press CTRL+C if this is not wanted!" -ForegroundColor Red
