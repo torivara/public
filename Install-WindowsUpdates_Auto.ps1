@@ -15,7 +15,7 @@
 	VERSION: 1.0
 	AUTHOR: Tor Ivar Larsen
     CREATED: 2015-12-21
-	LASTEDIT: 2015-12-21
+	LASTEDIT: 2018-12-07
 #>
 
 [CmdletBinding()]
