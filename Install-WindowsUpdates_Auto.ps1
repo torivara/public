@@ -34,11 +34,6 @@ function Get-WIAStatusValue($value)
    }  
 }
 
-#Disabling Windows Defender
-Write-Output "Windows Defender is known to slow update progress. Therefore it will be disabled before update install."
-Set-MpPreference -DisableRealtimeMonitoring $true
-If ($?) { Write-Output "Successfully disabled Windows Defender" }
-
 $Criteria = "IsInstalled=0 and IsHidden=0 and Type='Software'"
 
 #Update session
@@ -59,8 +54,13 @@ $Installer = New-Object -ComObject Microsoft.Update.Installer
 $Counter = 0
 $UpdateCount = ($SearchResult | Measure-Object).Count
 
-Write-Output "Available Updates"
 If ($UpdateCount -gt 0) {
+    #Disabling Windows Defender
+    Write-Output "Windows Defender is known to slow update progress. Therefore it will be disabled before update install."
+    Set-MpPreference -DisableRealtimeMonitoring $true
+    If ($?) { Write-Output "Successfully disabled Windows Defender" }
+    
+    Write-Output "Available Updates"
     $SearchResult | Select-Object Title | Format-Table -AutoSize
     Foreach ($Update in $SearchResult)
     {
@@ -115,4 +115,7 @@ If ($UpdateCount -gt 0) {
     Start-Sleep -Seconds 15
     Restart-Computer -Force -Confirm:$False
 
+}
+else {
+    Write-Output "No available updates detected."
 }
