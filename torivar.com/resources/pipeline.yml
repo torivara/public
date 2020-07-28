@@ -1,0 +1,54 @@
+name: FunctionAppComplete-CI
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - 'master'
+  paths:
+    include:
+    - '.azure'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+
+# Copy the ARM templates to staging directory
+- task: CopyFiles@2
+  displayName: 'Infrastructure: Copy templates to staging'
+  inputs:
+    contents: '$(System.DefaultWorkingDirectory)/.azure/**'
+    targetFolder: $(Build.ArtifactStagingDirectory)/templates
+
+- task: AzureCLI@2
+  displayName: 'Download ARM Template Tester Toolkit'
+  inputs:
+    azureSubscription: $(serviceConnection)
+    scriptType: 'pscore'
+    scriptLocation: 'inlineScript'
+    workingDirectory: $(System.DefaultWorkingDirectory)
+    inlineScript: 'curl https://azurequickstartsservice.blob.core.windows.net/ttk/latest/arm-template-toolkit.zip --output arm-template-toolkit.zip --silent'
+
+- task: ExtractFiles@1
+  displayName: 'Extract ARM Template Tester Toolkit'
+  inputs:
+    archiveFilePatterns: '$(System.DefaultWorkingDirectory)/arm-template-toolkit.zip'
+    destinationFolder: '$(System.DefaultWorkingDirectory)/arm-template-toolkit'
+    cleanDestinationFolder: true
+
+- task: PowerShell@2
+  displayName: 'Run deploymentTemplate tests from ARM Template Tester Toolkit'
+  inputs:
+    targetType: 'inline'
+    script: |
+      Import-Module ./arm-ttk.psd1
+      Test-AzTemplate -TemplatePath '$(System.DefaultWorkingDirectory)/.azure' -Test deploymentTemplate
+    pwsh: true
+    workingDirectory: '$(System.DefaultWorkingDirectory)/arm-template-toolkit/arm-ttk'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish artifacts'
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: 'drop'
