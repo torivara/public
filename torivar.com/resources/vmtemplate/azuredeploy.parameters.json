@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmName": {
+            "value": "linuxvm"
+        },
+        "adminUsername": {
+            "value": "localuser"
+        },
+        "adminPasswordOrKey": {
+            "value": "ThisIsMySuperSecurePassw0rd!"
+        },
+        "platform": {
+            "value": "Linux"
+        },
+        "existingVnetName": {
+            "value": "myVnet"
+        },
+        "existingVnetRgName": {
+            "value": "myVnetRg"
+        },
+        "existingSubnetName": {
+            "value": "subnet1"
+        },
+        "clientPublicIP": {
+            "value": "123.45.67.89"
+        }
+    }
+}
