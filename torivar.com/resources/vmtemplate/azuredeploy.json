@@ -96,7 +96,7 @@
                 "sshPublicKey"
             ],
             "metadata": {
-                "description": "Select the OS type to deploy."
+                "description": "Select the authentication type."
             }
         },
         "clientPublicIP": {

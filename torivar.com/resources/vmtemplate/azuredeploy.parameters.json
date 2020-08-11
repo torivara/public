@@ -15,10 +15,10 @@
             "value": "Linux"
         },
         "existingVnetName": {
-            "value": "myVnet"
+            "value": "vnet-myVnet"
         },
         "existingVnetRgName": {
-            "value": "myVnetRg"
+            "value": "rg-vmdeploytest"
         },
         "existingSubnetName": {
             "value": "subnet1"
