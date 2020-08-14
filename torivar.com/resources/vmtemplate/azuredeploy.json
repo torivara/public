@@ -112,8 +112,8 @@
         "storageAccountName": "[concat('diag', uniquestring(resourceGroup().id))]",
         "pipName": "[concat(variables('prefix'), '-', parameters('vmName'), '-publicip')]",
         "pipFqdn": "[variables('pipName')]",
-        "vmName": "[concat(variables('prefix'), parameters('vmName'))]",
-        "nicName": "[concat(variables('prefix'), parameters('vmName'), '-NIC1')]",
+        "vmName": "[concat(variables('prefix'), '-', parameters('vmName'))]",
+        "nicName": "[concat(variables('prefix'), '-', parameters('vmName'), '-NIC1')]",
         "subnetRef": "[resourceId(parameters('existingVnetRgName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('existingVnetName'), parameters('existingSubnetName'))]",
         "networkSecurityGroupName": "[concat(variables('prefix'), parameters('vmName'))]",
         "Linux": {
