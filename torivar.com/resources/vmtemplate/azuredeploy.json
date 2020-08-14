@@ -113,7 +113,7 @@
         "pipName": "[concat(variables('prefix'), '-', parameters('vmName'), '-publicip')]",
         "pipFqdn": "[variables('pipName')]",
         "vmName": "[concat(variables('prefix'), parameters('vmName'))]",
-        "nicName": "[variables('prefix'), parameters('vmName'), '-NIC1')]",
+        "nicName": "[concat(variables('prefix'), parameters('vmName'), '-NIC1')]",
         "subnetRef": "[resourceId(parameters('existingVnetRgName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('existingVnetName'), parameters('existingSubnetName'))]",
         "networkSecurityGroupName": "[concat(variables('prefix'), parameters('vmName'))]",
         "Linux": {
@@ -207,7 +207,7 @@
         },
         {
             "name": "[concat(variables('networkSecurityGroupName'),'/AllowRdpInBound')]",
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules"
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
@@ -230,7 +230,7 @@
         },
         {
             "name": "[concat(variables('networkSecurityGroupName'),'/AllowSshInBound')]",
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules"
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
             "location": "[parameters('location')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]"
