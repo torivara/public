@@ -105,17 +105,25 @@
             "metadata": {
                 "description": "Write your own public client IP to add NSG exception."
             }
+        },
+        "prefix": {
+            "type": "string",
+            "defaultValue": "tst",
+            "minLength": 2,
+            "maxLength": 5,
+            "metadata": {
+                "description": "Prefix to add to all resources deployed. Not too long."
+            }
         }
     },
     "variables": {
-        "prefix": "<your prefix here>",
         "storageAccountName": "[concat('diag', uniquestring(resourceGroup().id))]",
-        "pipName": "[concat(variables('prefix'), '-', parameters('vmName'), '-publicip')]",
+        "pipName": "[concat(parameters('prefix'), '-', parameters('vmName'), '-publicip')]",
         "pipFqdn": "[variables('pipName')]",
-        "vmName": "[concat(variables('prefix'), '-', parameters('vmName'))]",
-        "nicName": "[concat(variables('prefix'), '-', parameters('vmName'), '-NIC1')]",
+        "vmName": "[concat(parameters('prefix'), '-', parameters('vmName'))]",
+        "nicName": "[concat(parameters('prefix'), '-', parameters('vmName'), '-NIC1')]",
         "subnetRef": "[resourceId(parameters('existingVnetRgName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('existingVnetName'), parameters('existingSubnetName'))]",
-        "networkSecurityGroupName": "[concat(variables('prefix'), parameters('vmName'))]",
+        "networkSecurityGroupName": "[concat(parameters('prefix'), parameters('vmName'))]",
         "Linux": {
             "publisher": "Canonical",
             "offer": "UbuntuServer",
