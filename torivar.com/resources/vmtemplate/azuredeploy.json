@@ -123,7 +123,7 @@
         "vmName": "[concat(parameters('prefix'), '-', parameters('vmName'))]",
         "nicName": "[concat(parameters('prefix'), '-', parameters('vmName'), '-NIC1')]",
         "subnetRef": "[resourceId(parameters('existingVnetRgName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('existingVnetName'), parameters('existingSubnetName'))]",
-        "networkSecurityGroupName": "[concat(parameters('prefix'), parameters('vmName'))]",
+        "networkSecurityGroupName": "[concat(parameters('prefix'), '-', parameters('vmName'))]",
         "Linux": {
             "publisher": "Canonical",
             "offer": "UbuntuServer",
