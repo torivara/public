@@ -1,0 +1,15 @@
+{
+    "Name": "Notification Hub Administrator",
+    "IsCustom": true,
+    "Description": "Lets you perform all Notification Hub actions and dataactions.",
+    "Actions": [
+      "Microsoft.Resources/deployments/write",
+      "Microsoft.Notificationhubs/*"
+    ],
+    "NotActions": [],
+    "DataActions": [],
+    "NotDataActions": [],
+    "AssignableScopes": [
+      "/subscriptions/<your subscription id>"
+    ]
+  }

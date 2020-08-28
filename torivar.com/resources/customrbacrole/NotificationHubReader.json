@@ -1,0 +1,22 @@
+{
+    "Name": "Notification Hub Reader",
+    "IsCustom": true,
+    "Description": "Lets you view everything related to the Notification Hub, including access policies and connection strings.",
+    "Actions": [
+      "Microsoft.Notificationhubs/*/read",
+      "Microsoft.NotificationHubs/CheckNamespaceAvailability/action",
+      "Microsoft.NotificationHubs/Namespaces/authorizationRules/action",
+      "Microsoft.NotificationHubs/Namespaces/CheckNotificationHubAvailability/action",
+      "Microsoft.NotificationHubs/Namespaces/authorizationRules/listkeys/action",
+      "Microsoft.NotificationHubs/Namespaces/NotificationHubs/authorizationRules/action",
+      "Microsoft.NotificationHubs/Namespaces/NotificationHubs/pnsCredentials/action",
+      "Microsoft.NotificationHubs/Namespaces/NotificationHubs/debugSend/action",
+      "Microsoft.NotificationHubs/Namespaces/NotificationHubs/authorizationRules/listkeys/action"
+    ],
+    "NotActions": [],
+    "DataActions": [],
+    "NotDataActions": [],
+    "AssignableScopes": [
+      "/subscriptions/<your subscription guid>"
+    ]
+  }
