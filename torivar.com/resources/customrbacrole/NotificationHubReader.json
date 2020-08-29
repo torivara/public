@@ -3,6 +3,7 @@
   "IsCustom": true,
   "Description": "Lets you view everything related to the Notification Hub, including access policies and connection strings. Can also regenerate hub access policy keys.",
   "Actions": [
+    "Microsoft.Resources/subscriptions/resourceGroups/read",
     "Microsoft.Notificationhubs/*/read",
     "Microsoft.NotificationHubs/CheckNamespaceAvailability/action",
     "Microsoft.NotificationHubs/Namespaces/authorizationRules/action",

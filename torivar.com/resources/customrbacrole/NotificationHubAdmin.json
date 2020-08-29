@@ -4,6 +4,7 @@
     "Description": "Lets you perform all Notification Hub actions and dataactions.",
     "Actions": [
       "Microsoft.Resources/deployments/write",
+      "Microsoft.Resources/subscriptions/resourceGroups/read",
       "Microsoft.Notificationhubs/*"
     ],
     "NotActions": [],
