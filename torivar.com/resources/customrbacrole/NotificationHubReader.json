@@ -5,9 +5,7 @@
   "Actions": [
     "Microsoft.Resources/subscriptions/resourceGroups/read",
     "Microsoft.Notificationhubs/*/read",
-    "Microsoft.NotificationHubs/CheckNamespaceAvailability/action",
     "Microsoft.NotificationHubs/Namespaces/authorizationRules/action",
-    "Microsoft.NotificationHubs/Namespaces/CheckNotificationHubAvailability/action",
     "Microsoft.NotificationHubs/Namespaces/authorizationRules/listkeys/action",
     "Microsoft.NotificationHubs/Namespaces/NotificationHubs/pnsCredentials/action",
     "Microsoft.NotificationHubs/Namespaces/NotificationHubs/debugSend/action",
