@@ -1,7 +1,7 @@
 {
     "Name": "Notification Hub Administrator",
     "IsCustom": true,
-    "Description": "Lets you perform all Notification Hub actions and dataactions.",
+    "Description": "Lets you perform all Notification Hub and NameSpace operations.",
     "Actions": [
       "Microsoft.Resources/deployments/write",
       "Microsoft.Resources/subscriptions/resourceGroups/read",
