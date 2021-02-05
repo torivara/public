@@ -60,20 +60,6 @@
             "defaultValue": "local",
             "type": "string"
         },
-        "HostingPlanResourceGroup": {
-            "type": "string",
-            "defaultValue": "[resourceGroup().Name]",
-            "metadata": {
-                "description": "Existing App Service Plan Resource Group."
-            }
-        },
-        "HostingPlanName": {
-            "type": "string",
-            "defaultValue": "",
-            "metadata": {
-                "description": "Existing App Service Plan Name."
-            }
-        },
         "appInsightsLocation": {
             "defaultValue": "[resourceGroup().Location]",
             "type": "string"
@@ -84,10 +70,9 @@
         }
     },
     "variables": {
-        "hostingPlanName": "[if(empty(parameters('hostingPlanName')), variables('hostingPlanNameGenerated'), parameters('hostingPlanName'))]",
-        "hostingPlanNameGenerated": "[concat('ASP-MD-', parameters('name'), '-', parameters('environment'))]",
-        "webAppName": "[concat('APP-MD-', parameters('name'), '-', parameters('environment'))]",
-        "appInsightsName": "[concat('AI-MD-', parameters('name'), '-', parameters('environment'))]",
+        "hostingPlanName": "example-asp",
+        "webAppName": "example-app",
+        "appInsightsName": "example-ai",
         "alwaysOn": "[parameters('alwaysOn')]",
         "workerSize": 0,
         "workerSizeId": 0,
@@ -97,7 +82,6 @@
         {
             "apiVersion": "2020-06-01",
             "name": "[variables('hostingPlanName')]",
-            "condition": "[empty(parameters('HostingPlanName'))]",
             "type": "Microsoft.Web/serverfarms",
             "location": "[parameters('location')]",
             "tags": {
@@ -150,7 +134,7 @@
                     "alwaysOn": "[variables('alwaysOn')]",
                     "minTlsVersion": "1.2"
                 },
-                "serverFarmId": "[resourceId(parameters('HostingPlanResourceGroup'), 'Microsoft.Web/serverfarms', variables('HostingPlanName'))]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('HostingPlanName'))]",
                 "hostingEnvironment": "[parameters('hostingEnvironment')]",
                 "clientAffinityEnabled": true,
                 "httpsOnly": true
