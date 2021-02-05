@@ -35,6 +35,18 @@
                 {
                     "name": "CustomSetting2",
                     "value": "This is another custom setting"
+                },
+                {
+                    "name": "CustomSetting3",
+                    "value": "This is another custom setting"
+                },
+                {
+                    "name": "CustomSetting4",
+                    "value": "This is another custom setting"
+                },
+                {
+                    "name": "CustomSetting5",
+                    "value": "This is another custom setting"
                 }
             ]
         }
