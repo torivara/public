@@ -134,7 +134,7 @@
                     "alwaysOn": "[variables('alwaysOn')]",
                     "minTlsVersion": "1.2"
                 },
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('HostingPlanName'))]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
                 "hostingEnvironment": "[parameters('hostingEnvironment')]",
                 "clientAffinityEnabled": true,
                 "httpsOnly": true
