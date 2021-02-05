@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "value": "example"
+        },
+        "environment": {
+            "value": "Test"
+        },
+        "costCenterTagValue": {
+            "value": "projectX"
+        },
+        "currentStack": {
+            "value": "dotnetcore"
+        },
+        "netframeworkversion": {
+            "value": "v4.0"
+        },
+        "phpVersion": {
+            "value": "OFF"
+        },
+        "alwaysOn": {
+            "value": false
+        },
+        "HostingPlanResourceGroup": {
+            "value": "example-rg"
+        },
+        "HostingPlanName": {
+            "value": "example-asp"
+        },
+        "appInsightsLocation": {
+            "value": "norwayeast"
+        },
+        "customAppSettings": {
+            "value": [
+                {
+                    "name": "CustomSetting1",
+                    "value": "This is a custom setting"
+                },
+                {
+                    "name": "CustomSetting2",
+                    "value": "This is another custom setting"
+                }
+            ]
+        }
+    }
+}

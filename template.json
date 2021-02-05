@@ -1,0 +1,173 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string",
+            "metadata": {
+                "description": "Used to generate resource names."
+            }
+        },
+        "environment": {
+            "type": "string",
+            "allowedValues": [
+                "Dev",
+                "Test",
+                "Prod"
+            ],
+            "metadata": {
+                "description": "Environment where resources are deployed."
+            }
+        },
+        "costCenterTagValue": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for resource deployment. Defaults to resource group location."
+            }
+        },
+        "hostingEnvironment": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "sku": {
+            "type": "string",
+            "defaultValue": "Basic"
+        },
+        "skuCode": {
+            "type": "string",
+            "defaultValue": "B1"
+        },
+        "currentStack": {
+            "type": "string"
+        },
+        "netframeworkversion": {
+            "type": "string",
+            "defaultValue": "v4.0"
+        },
+        "phpVersion": {
+            "type": "string",
+            "defaultValue": "7.4"
+        },
+        "alwaysOn": {
+            "type": "bool",
+            "defaultValue": true
+        },
+        "release": {
+            "defaultValue": "local",
+            "type": "string"
+        },
+        "HostingPlanResourceGroup": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().Name]",
+            "metadata": {
+                "description": "Existing App Service Plan Resource Group."
+            }
+        },
+        "HostingPlanName": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Existing App Service Plan Name."
+            }
+        },
+        "appInsightsLocation": {
+            "defaultValue": "[resourceGroup().Location]",
+            "type": "string"
+        },
+        "customAppSettings": {
+            "type": "array",
+            "defaultValue": []
+        }
+    },
+    "variables": {
+        "hostingPlanName": "[if(empty(parameters('hostingPlanName')), variables('hostingPlanNameGenerated'), parameters('hostingPlanName'))]",
+        "hostingPlanNameGenerated": "[concat('ASP-MD-', parameters('name'), '-', parameters('environment'))]",
+        "webAppName": "[concat('APP-MD-', parameters('name'), '-', parameters('environment'))]",
+        "appInsightsName": "[concat('AI-MD-', parameters('name'), '-', parameters('environment'))]",
+        "alwaysOn": "[parameters('alwaysOn')]",
+        "workerSize": 0,
+        "workerSizeId": 0,
+        "numberOfWorkers": 1
+    },
+    "resources": [
+        {
+            "apiVersion": "2020-06-01",
+            "name": "[variables('hostingPlanName')]",
+            "condition": "[empty(parameters('HostingPlanName'))]",
+            "type": "Microsoft.Web/serverfarms",
+            "location": "[parameters('location')]",
+            "tags": {
+                "CostCenter": "[parameters('costCenterTagValue')]",
+                "Environment": "[parameters('environment')]",
+                "IaC": "[concat('IaC-Release-',parameters('release'))]"
+            },
+            "properties": {
+                "name": "[variables('hostingPlanName')]",
+                "workerSize": "[variables('workerSize')]",
+                "workerSizeId": "[variables('workerSizeId')]",
+                "numberOfWorkers": "[variables('numberOfWorkers')]",
+                "reserved": false,
+                "hostingEnvironment": "[parameters('hostingEnvironment')]"
+            },
+            "sku": {
+                "Tier": "[parameters('sku')]",
+                "Name": "[parameters('skuCode')]"
+            }
+        },
+        {
+            "apiVersion": "2020-06-01",
+            "name": "[variables('webAppName')]",
+            "type": "Microsoft.Web/sites",
+            "location": "[parameters('location')]",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "tags": {
+                "CostCenter": "[parameters('costCenterTagValue')]",
+                "Environment": "[parameters('environment')]",
+                "IaC": "[concat('IaC-Release-',parameters('release'))]"
+            },
+            "dependsOn": [
+                "[resourceId('microsoft.insights/components/', variables('appInsightsName'))]"
+            ],
+            "properties": {
+                "name": "[variables('webAppName')]",
+                "siteConfig": {
+                    "appSettings": "[union(parameters('customAppSettings'),createArray(json(concat('{\"name\": \"APPINSIGHTS_INSTRUMENTATIONKEY\", \"value\": \"',reference(resourceId('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey,'\"}')),json(concat('{\"name\": \"APPLICATIONINSIGHTS_CONNECTION_STRING\", \"value\": \"',reference(resourceId('microsoft.insights/components/', variables('appInsightsName'))).ConnectionString,'\"}')),json(concat('{\"name\": \"ApplicationInsightsAgent_EXTENSION_VERSION\", \"value\": \"~2\"}')),json(concat('{\"name\": \"XDT_MicrosoftApplicationInsights_Mode\", \"value\": \"recommended\"}')),json(concat('{\"name\": \"InstrumentationEngine_EXTENSION_VERSION\", \"value\": \"~1\"}')),json(concat('{\"name\": \"XDT_MicrosoftApplicationInsights_BaseExtensions\", \"value\": \"~1\"}'))))]",
+                    "metadata": [
+                        {
+                            "name": "CURRENT_STACK",
+                            "value": "[parameters('currentStack')]"
+                        }
+                    ],
+                    "netFrameworkVersion": "[parameters('netFrameworkVersion')]",
+                    "phpVersion": "[parameters('phpVersion')]",
+                    "alwaysOn": "[variables('alwaysOn')]",
+                    "minTlsVersion": "1.2"
+                },
+                "serverFarmId": "[resourceId(parameters('HostingPlanResourceGroup'), 'Microsoft.Web/serverfarms', variables('HostingPlanName'))]",
+                "hostingEnvironment": "[parameters('hostingEnvironment')]",
+                "clientAffinityEnabled": true,
+                "httpsOnly": true
+            }
+        },
+        {
+            "apiVersion": "2020-02-02-preview",
+            "name": "[variables('appInsightsName')]",
+            "type": "Microsoft.Insights/components",
+            "location": "[parameters('appInsightsLocation')]",
+            "tags": {
+                "CostCenter": "[parameters('costCenterTagValue')]",
+                "Environment": "[parameters('environment')]",
+                "IaC": "[concat('IaC-Release-',parameters('release'))]"
+            },
+            "properties": {
+                "Application_Type": "web"
+            }
+        }
+    ]
+}
