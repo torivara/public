@@ -70,9 +70,9 @@
         }
     },
     "variables": {
-        "hostingPlanName": "example-asp",
-        "webAppName": "example-app",
-        "appInsightsName": "example-ai",
+        "hostingPlanName": "[concat(uniqueString(concat(resourceGroup().id, subscription().id)), '-example-asp')]",
+        "webAppName": "[concat(uniqueString(concat(resourceGroup().id, subscription().id)), '-example-app')]",
+        "appInsightsName": "[concat(uniqueString(concat(resourceGroup().id, subscription().id)), '-example-ai')]",
         "alwaysOn": "[parameters('alwaysOn')]",
         "workerSize": 0,
         "workerSizeId": 0,
