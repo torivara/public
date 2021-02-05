@@ -132,7 +132,8 @@
                 "IaC": "[concat('IaC-Release-',parameters('release'))]"
             },
             "dependsOn": [
-                "[resourceId('microsoft.insights/components/', variables('appInsightsName'))]"
+                "[resourceId('microsoft.insights/components/', variables('appInsightsName'))]",
+                "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
             ],
             "properties": {
                 "name": "[variables('webAppName')]",
