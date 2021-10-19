@@ -19,3 +19,5 @@ resource acrResource 'Microsoft.ContainerRegistry/registries@2021-06-01-preview'
     adminUserEnabled: false
   }
 }
+
+output acrLoginServer string = reference(acrResource.id, '2019-12-01-preview').loginServer
