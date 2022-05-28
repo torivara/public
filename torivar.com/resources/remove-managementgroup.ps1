@@ -1,3 +1,38 @@
+<# 
+.DESCRIPTION 
+ This script will delete an entire tree of Management Groups if they do not contain any subscriptions.
+ 
+.SYNOPSIS
+ Delete Azure Management Groups recursively.
+
+.DESCRIPTION
+  You need to log in with an Azure account. Then this script can be run and pointed at a Management Group.
+  It will then recursively traverse the tree and delete the Management Groups.
+  The Root Management Group can't be deleted.
+
+  Before any deletions are performed, a Az Graph search query will check for any subscriptions in the tree.
+  If there are subscriptions present, nothing will be deleted, as this script does not delete or move subscriptions.
+
+  If you try to delete the default Management Group, you will be presented with a choice of which new Management
+  Group to set as default.
+
+.PARAMETER mgName
+  This is a required parameter, and is the name or id of the management group you want to recursively delete.
+
+.PARAMETER dryrun
+  This is not a required parameter, but will run in a dryrun mode to write which changes would be performed.
+  This is a nice first run, but will not catch default management group.
+
+.EXAMPLE
+  Run to check which Management Groups would be deleted (dryrun is true when not explicitly set to false, but can be set anyway)
+  .\remove-managementgroup.ps1 -mgName managementGroupName -dryrun $true
+
+.EXAMPLE
+  Run to actually delete the Management Groups in tree
+  .\remove-managementgroup.ps1 -mgName managementGroupName -dryrun $false
+
+#>
+
 [CmdletBinding()]
 param (
     [Parameter(Mandatory=$true)]
@@ -6,7 +41,7 @@ param (
     [boolean]$dryrun=$true
 )
 
-function Remove-ManagementGroupForce() {
+function Remove-ManagementGroupRecursive() {
 [CmdletBinding()]
 param (
     [Parameter(Mandatory=$true)]
@@ -28,9 +63,9 @@ param (
     {
       #tries to recurs to each child item
       if ($dryrun) {
-        Remove-ManagementGroupForce -name $($children.Name) -dryrun $true
+        Remove-ManagementGroupRecursive -name $($children.Name) -dryrun $true
       } else {
-        Remove-ManagementGroupForce -name $($children.Name) -dryrun $false
+        Remove-ManagementGroupRecursive -name $($children.Name) -dryrun $false
       }
     }
   }
@@ -111,12 +146,12 @@ if ($subs) {
   $subs | Select-Object name,@{ Name = 'ManagementGroupLocation';  Expression = {$_.properties.managementGroupAncestorsChain.displayName -join "->"}},subscriptionId | Format-Table -AutoSize
 } else {
   if ($dryrun) {
-    Remove-ManagementGroupForce -name $mgName -dryrun $true
+    Remove-ManagementGroupRecursive -name $mgName -dryrun $true
   } else {
     Write-Host "Please be aware that this will delete group '$mgName' and all sub-level management groups." -ForegroundColor Yellow
     Write-Host "Non-empty groups or default groups will cause error." -ForegroundColor Yellow
     Write-Host "Press Ctrl + C during the next 10 seconds if you changed your mind." -ForegroundColor Yellow
     Start-Sleep -Seconds 10
-    Remove-ManagementGroupForce -name $mgName -dryrun $false
+    Remove-ManagementGroupRecursive -name $mgName -dryrun $false
   }
 }
