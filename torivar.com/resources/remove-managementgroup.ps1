@@ -139,6 +139,13 @@ function Get-MgSubscriptions {
   }
 }
 
+$context = Get-AzContext
+
+if (-not $context.Tenant.id) {
+  Write-Host "Not authenticated to Azure. Redirecting you to login in a browser."
+  Connect-AzAccount
+}
+
 $subs = Get-MgSubscriptions -name $mgName
 
 if ($subs) {
