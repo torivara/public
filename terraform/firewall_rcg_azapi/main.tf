@@ -70,7 +70,7 @@ resource "azapi_resource" "rule_collection_group" {
         {
           ruleCollectionType = "FirewallPolicyFilterRuleCollection"
           name               = "ruleCollectionTest"
-          priority           = 1000
+          priority           = 1100
           action = {
             type = "Allow"
           }
