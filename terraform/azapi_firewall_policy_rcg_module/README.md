@@ -58,3 +58,19 @@ module "mssql_rcg" {
   }
 ]
 ```
+
+## Inputs
+
+|Name|Required|Type|Default|
+|---|---|---|---|
+|firewall_policy_id|Yes|String|N/A|
+|api_version|No|String|2021-08-01|
+|firewall_rule_collection_group_name|Yes|String|N/A|
+|firewall_rule_collection_group_priority|Yes|Number|N/A|
+|rules|Yes|List of objects|N/A|
+
+See above for rules structure example.
+
+## Outputs
+
+None
