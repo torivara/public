@@ -12,11 +12,13 @@ variable "api_version" {
 variable "firewall_rule_collection_group_name" {
   type        = string
   description = "Name of the new rule collection group"
+  default = "MssqlWorkaroundRuleCollection"
 }
 
 variable "firewall_rule_collection_group_priority" {
   type        = number
   description = "Priority of your Rule Collection Group"
+  default = 900
 }
 
 variable "rules" {
