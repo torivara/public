@@ -7,7 +7,6 @@ terraform {
     }
   }
   # Your Terraform state will be stored in this storage account
-  # Service principal needs permission storage blob data owner
   backend "azurerm" {
     resource_group_name  = "tf-example-rg"
     storage_account_name = "tfstatesa1234"
