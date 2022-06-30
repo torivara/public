@@ -1,3 +1,5 @@
+# Assumes no environment variables. No partial configuration.
+
 # AzureRM provider pinned to 3.11.0
 terraform {
   required_providers {
@@ -19,8 +21,7 @@ terraform {
     # THIS IS NOT BEST PRACTICE!
     client_secret = "!234u23054ubnazocbnweortw4tf=)(&/%%/¤)"
 
-    # If you must, do this
-    # Source the client_secret from a variable like below
+    # If you must, source the client_secret from a variable like below
     # client_secret = var.client_secret
   }
 }
@@ -31,7 +32,6 @@ variable "client_secret" {
 }
 
 # Configure the Microsoft Azure Provider
-# No Authentication here, since Az CLI provides access
 provider "azurerm" {
   features {}
   subscription_id = "00000000-0000-0000-0000-000000000000"
@@ -40,8 +40,7 @@ provider "azurerm" {
   # THIS IS NOT BEST PRACTICE
   client_secret = "!234u23054ubnazocbnweortw4tf=)(&/%%/¤)"
 
-  # If you must, do this
-  # Source the client_secret from a variable like below
+  # If you must, source the client_secret from a variable like below
   # client_secret = var.client_secret
 }
 

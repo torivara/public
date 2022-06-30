@@ -18,7 +18,6 @@ terraform {
 }
 
 # Configure the Microsoft Azure Provider
-# No Authentication here, since Az CLI provides access
 provider "azurerm" {
   features {}
 
