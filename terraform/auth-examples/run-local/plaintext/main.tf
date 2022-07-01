@@ -1,4 +1,5 @@
 # Assumes no environment variables. No partial configuration.
+# No other authentication necessary.
 
 # AzureRM provider pinned to 3.11.0
 terraform {

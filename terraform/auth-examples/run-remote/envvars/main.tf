@@ -1,3 +1,6 @@
+# Assumes ARM_CLIENT_ID, ARM_CLIENT_SECRET, ARM_SUBSCRIPTION_ID, and ARM_TENANT_ID environment variables are set to relevant values.
+# See available PowerShell or Bash snippets in same folder.
+
 # AzureRM provider pinned to 3.11.0
 terraform {
   required_providers {
@@ -11,17 +14,13 @@ terraform {
     resource_group_name  = "tf-example-rg"
     storage_account_name = "tfstatesa1234"
     container_name       = "tfstate"
-    key                  = "azcli.terraform.tfstate"
-
-    subscription_id = "00000000-0000-0000-0000-000000000000"
+    key                  = "envvars.terraform.tfstate"
   }
 }
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
-
-  subscription_id = "00000000-0000-0000-0000-000000000000"
 }
 
 resource "azurerm_resource_group" "rg" {

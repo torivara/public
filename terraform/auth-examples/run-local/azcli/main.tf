@@ -1,5 +1,4 @@
-# Assumes ARM_CLIENT_ID, ARM_SUBSCRIPTION_ID, and ARM_TENANT_ID environment variables are set to relevant values.
-# See available PowerShell or Bash snippets in same folder.
+# Assumes you have authenticated with Azure CLI before running Terraform
 
 # AzureRM provider pinned to 3.11.0
 terraform {
@@ -14,15 +13,17 @@ terraform {
     resource_group_name  = "tf-example-rg"
     storage_account_name = "tfstatesa1234"
     container_name       = "tfstate"
-    key                  = "oidc.terraform.tfstate"
-    use_oidc             = true
+    key                  = "azcli.terraform.tfstate"
+
+    subscription_id = "00000000-0000-0000-0000-000000000000"
   }
 }
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
   features {}
-  use_oidc = true
+
+  subscription_id = "00000000-0000-0000-0000-000000000000"
 }
 
 resource "azurerm_resource_group" "rg" {
