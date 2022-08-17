@@ -8,11 +8,18 @@ terraform {
       source  = "hashicorp/azuread"
       version = ">= 2.27.0"
     }
+    azapi = {
+      source = "azure/azapi"
+    }
   }
 }
 
 provider "azurerm" {
   features {}
+}
+
+provider "azapi" {
+  tenant_id = data.azurerm_client_config.current.tenant_id
 }
 
 data "azurerm_client_config" "current" {}
@@ -70,7 +77,7 @@ resource "azurerm_role_assignment" "eventhub-owner-authrule-scope" {
   role_definition_name = "Azure Event Hubs Data Owner"
 }
 
-resource "azurerm_monitor_diagnostic_setting" "diag-setting" {
+resource "azurerm_monitor_diagnostic_setting" "diag-setting-subscription" {
   name                           = "toEventHub"
   target_resource_id             = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
   eventhub_name                  = azurerm_eventhub.activity-logs.name
@@ -148,4 +155,34 @@ resource "azurerm_monitor_diagnostic_setting" "diag-setting" {
       enabled = false
     }
   }
+}
+
+resource "azapi_resource" "diag-setting-management-group" {
+  type      = "Microsoft.Insights/diagnosticSettings@2021-05-01-preview"
+  name      = "toEventHub"
+  parent_id = "/providers/Microsoft.Management/managementGroups/torivar-inc"
+  body = jsonencode({
+    properties = {
+      eventHubAuthorizationRuleId = azurerm_eventhub_namespace_authorization_rule.listen-send.id
+      eventHubName                = azurerm_eventhub.activity-logs.name
+      logs = [
+        {
+          category = "Administrative"
+          enabled  = true
+          retentionPolicy = {
+            days    = 0
+            enabled = false
+          }
+        },
+        {
+          category = "Policy"
+          enabled  = false
+          retentionPolicy = {
+            days    = 0
+            enabled = false
+          }
+        }
+      ]
+    }
+  })
 }
