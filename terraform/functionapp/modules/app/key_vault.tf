@@ -7,10 +7,6 @@ resource "azurerm_key_vault" "fa-kv" {
   enable_rbac_authorization  = true
   soft_delete_retention_days = 90
 
-  lifecycle {
-    prevent_destroy = true
-  }
-
   network_acls {
     bypass         = "AzureServices"
     default_action = "Deny"
