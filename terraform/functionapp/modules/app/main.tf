@@ -24,7 +24,6 @@ resource "azurerm_service_plan" "fa-asp" {
   resource_group_name = azurerm_resource_group.fa-rg.name
   os_type             = var.os_type
   sku_name            = var.sku_name
-  reserved            = var.os_type == "Linux" ? true : false
 }
 
 resource "azurerm_windows_function_app" "fa-app" {
