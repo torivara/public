@@ -25,7 +25,7 @@ variable "app_name" {
 variable "os_type" {
   type        = string
   description = "OS type for you function app."
-  default     = "windows"
+  default     = "Windows"
 }
 
 variable "sku_name" {
