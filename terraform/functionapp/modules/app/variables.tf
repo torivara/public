@@ -33,3 +33,15 @@ variable "sku_name" {
   description = "SKU name for your app service plan. Defaults to consumption plan Y1. Skus can be found here: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/service_plan#sku_name"
   default     = "Y1"
 }
+
+variable "vnet_integration_enabled" {
+  type        = bool
+  description = "Enable or disable vnet integration? Defaults to false."
+  default     = false
+}
+
+variable "vnet_integration_subnet_id" {
+  type        = string
+  description = "Subnet id for enabling vnet integration. Defaults to creating a vnet with dedicated subnet, if vnet integration is enabled."
+  default     = null
+}

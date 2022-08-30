@@ -8,9 +8,10 @@ resource "azurerm_key_vault" "fa-kv" {
   soft_delete_retention_days = 90
 
   network_acls {
-    bypass         = "AzureServices"
-    default_action = "Deny"
-    ip_rules       = azurerm_windows_function_app.fa-app.outbound_ip_address_list
+    bypass                     = "AzureServices"
+    default_action             = "Deny"
+    ip_rules                   = azurerm_windows_function_app.fa-app.outbound_ip_address_list
+    virtual_network_subnet_ids = var.vnet_integration_enabled == false ? [] : [local.virtual_network_subnet_id]
   }
 
 }
