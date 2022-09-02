@@ -1,5 +1,5 @@
 locals {
-  virtual_network_subnet_id = var.vnet_integration_subnet_id == null ? azurerm_subnet.integration-subnet[0].id : var.vnet_integration_subnet_id
+  virtual_network_subnet_id = var.vnet_integration_subnet_id == null ? (var.vnet_integration_enabled == true ? azurerm_subnet.integration-subnet[0].id : null) : var.vnet_integration_subnet_id
 }
 
 resource "azurerm_storage_account" "fa-sa" {

@@ -60,7 +60,7 @@ resource "azurerm_windows_function_app" "fa-app" {
 resource "azurerm_app_service_virtual_network_swift_connection" "app-integration" {
   count          = var.vnet_integration_enabled == true && var.vnet_integration_subnet_id == null ? 1 : 0
   app_service_id = azurerm_windows_function_app.fa-app.id
-  subnet_id      = var.vnet_integration_subnet_id == null ? azurerm_subnet.integration-subnet.id : var.vnet_integration_subnet_id
+  subnet_id      = var.vnet_integration_subnet_id == null ? azurerm_subnet.integration-subnet[0].id : var.vnet_integration_subnet_id
 }
 
 resource "azurerm_role_assignment" "fa_kv_assignment" {
