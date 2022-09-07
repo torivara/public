@@ -3,8 +3,6 @@ param($Timer)
 
 Connect-AzAccount -Identity
 
-Get-AzResourceGroup
-
 $AllRGs = (Get-AzResourceGroup).ResourceGroupName
 $UsedRGs = (Get-AzResource | Group-Object ResourceGroupName).Name
 $EmptyGroups = $AllRGs | Where-Object {$_ -notin $UsedRGs}
