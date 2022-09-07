@@ -51,7 +51,7 @@ variable "identity_type" {
   default = "SystemAssigned"
 }
 
-variable "user_assigned_identity_ids" {
+variable "user_assigned_identity_resource_ids" {
   type    = list(string)
   default = []
 }

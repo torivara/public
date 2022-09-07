@@ -1,6 +1,6 @@
 resource "azurerm_key_vault" "fa-kv" {
   location                   = azurerm_resource_group.fa-rg.location
-  name                       = "${local.name_prefix}-mon-sec${random_string.unique.result}-kv"
+  name                       = "${local.resource_prefix}-kv"
   resource_group_name        = azurerm_resource_group.fa-rg.name
   sku_name                   = "standard"
   tenant_id                  = data.azurerm_client_config.current.tenant_id

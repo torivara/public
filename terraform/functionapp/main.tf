@@ -9,11 +9,11 @@ module "functionapp-dev" {
 }
 
 module "functionapp-test" {
-  source                     = "./modules/app"
-  name_prefix                = "test"
-  vnet_integration_enabled   = false
-  identity_type              = "UserAssigned"
-  user_assigned_identity_ids = [azurerm_user_assigned_identity.identity.principal_id]
+  source                              = "./modules/app"
+  name_prefix                         = "test"
+  vnet_integration_enabled            = false
+  identity_type                       = "UserAssigned"
+  user_assigned_identity_resource_ids = [azurerm_user_assigned_identity.identity.id]
 
 }
 
@@ -36,7 +36,7 @@ resource "azurerm_role_assignment" "reader-dev" {
 }
 
 resource "azurerm_role_assignment" "reader-test" {
-  principal_id         = azurerm_user_assigned_identity.identity.principal_id
+  principal_id         = azurerm_user_assigned_identity.identity.id
   scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
   role_definition_name = "Reader"
 }

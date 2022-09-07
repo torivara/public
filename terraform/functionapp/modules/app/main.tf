@@ -36,7 +36,7 @@ resource "azurerm_windows_function_app" "fa-app" {
 
   identity {
     type         = var.identity_type
-    identity_ids = var.identity_type == "UserAssigned" && var.user_assigned_identity_ids != "" ? var.user_assigned_identity_ids : []
+    identity_ids = var.identity_type == "UserAssigned" && var.user_assigned_identity_resource_ids != [] ? var.user_assigned_identity_resource_ids : []
   }
 
   site_config {
