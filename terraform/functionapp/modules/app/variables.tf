@@ -45,3 +45,13 @@ variable "vnet_integration_subnet_id" {
   description = "Subnet id for enabling vnet integration. Defaults to creating a vnet with dedicated subnet, if vnet integration is enabled."
   default     = null
 }
+
+variable "identity_type" {
+  type    = string
+  default = "SystemAssigned"
+}
+
+variable "user_assigned_identity_ids" {
+  type    = list(string)
+  default = []
+}

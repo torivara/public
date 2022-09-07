@@ -26,12 +26,6 @@ resource "azurerm_service_plan" "fa-asp" {
   sku_name            = var.sku_name
 }
 
-resource "azurerm_user_assigned_identity" "identity" {
-  location            = azurerm_resource_group.fa-rg.location
-  name                = "${local.resource_prefix}-app-mi"
-  resource_group_name = azurerm_resource_group.fa-rg.name
-}
-
 resource "azurerm_windows_function_app" "fa-app" {
   location                   = azurerm_service_plan.fa-asp.location
   name                       = "${local.resource_prefix}-app"
@@ -41,8 +35,8 @@ resource "azurerm_windows_function_app" "fa-app" {
   storage_account_name       = azurerm_storage_account.fa-sa.name
 
   identity {
-    type         = "SystemAssigned, UserAssigned"
-    identity_ids = [azurerm_user_assigned_identity.identity.id]
+    type         = var.identity_type
+    identity_ids = var.identity_type == "UserAssigned" && var.user_assigned_identity_ids != "" ? var.user_assigned_identity_ids : []
   }
 
   site_config {
