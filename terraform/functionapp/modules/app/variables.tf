@@ -1,7 +1,7 @@
 variable "name_prefix" {
   type        = string
   default     = "fa"
-  description = "Prefix for all resources. Will be added to everything. 2-4 chars"
+  description = "Prefix for all resources. Will be added to everything. 2-4 lowercase letters"
 }
 
 variable "app_insights_workspace_id" {
