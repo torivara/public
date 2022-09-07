@@ -36,7 +36,19 @@ resource "azurerm_role_assignment" "reader-dev" {
 }
 
 resource "azurerm_role_assignment" "reader-test" {
-  principal_id         = azurerm_user_assigned_identity.identity.id
+  principal_id         = azurerm_user_assigned_identity.identity.principal_id
   scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
   role_definition_name = "Reader"
+}
+
+resource "azurerm_role_assignment" "fa_kv_assignment_dev" {
+  principal_id         = module.functionapp-dev.principal_id
+  scope                = module.functionapp-test.kv_id
+  role_definition_name = "Key Vault Secrets User"
+}
+
+resource "azurerm_role_assignment" "fa_kv_assignment_test" {
+  principal_id         = azurerm_user_assigned_identity.identity.principal_id
+  scope                = module.functionapp-test.kv_id
+  role_definition_name = "Key Vault Secrets User"
 }

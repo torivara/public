@@ -70,8 +70,3 @@ resource "azurerm_app_service_virtual_network_swift_connection" "app-integration
   subnet_id      = var.vnet_integration_subnet_id == null ? azurerm_subnet.integration-subnet[0].id : var.vnet_integration_subnet_id
 }
 
-resource "azurerm_role_assignment" "fa_kv_assignment" {
-  principal_id         = azurerm_windows_function_app.fa-app.identity[0].principal_id
-  scope                = azurerm_key_vault.fa-kv.id
-  role_definition_name = "Key Vault Secrets User"
-}
