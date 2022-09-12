@@ -24,7 +24,7 @@ resource "null_resource" "processes" {
     build_number = timestamp()
   }
   provisioner "local-exec" {
-    command     = "Get-Process | Where-Object {$_.ProcessName -eq 'code'} | Select-Object -First 1"
+    command     = "Get-Process | Select-Object -First 1"
     interpreter = ["pwsh", "-NoProfile", "-Command"]
   }
 }
