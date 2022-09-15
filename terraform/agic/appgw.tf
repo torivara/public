@@ -80,7 +80,7 @@ resource "azurerm_application_gateway" "network" {
       http_listener,
       probe,
       tags,
-      frontent_port
+      frontend_port
     ]
   }
 }
