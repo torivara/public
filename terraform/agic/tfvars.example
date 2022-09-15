@@ -1,0 +1,3 @@
+jumpbox_admin_password = "your password"
+client_public_ip = "ip address"
+admin_group_object_ids = [ "user or group object id" ]

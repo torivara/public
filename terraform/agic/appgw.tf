@@ -71,4 +71,16 @@ resource "azurerm_application_gateway" "network" {
   tags = var.tags
 
   depends_on = [azurerm_virtual_network.test, azurerm_public_ip.test]
+
+  lifecycle {
+    ignore_changes = [
+      backend_address_pool,
+      backend_http_settings,
+      request_routing_rule,
+      http_listener,
+      probe,
+      tags,
+      frontent_port
+    ]
+  }
 }

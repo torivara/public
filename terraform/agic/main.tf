@@ -23,8 +23,9 @@ resource "azurerm_role_assignment" "aks_id_contributor_agw" {
 }
 
 resource "azurerm_role_assignment" "aks_ingressid_contributor_agw" {
-  scope                = azurerm_application_gateway.network.id
-  role_definition_name = "Contributor"
-  principal_id         = azurerm_kubernetes_cluster.k8s.ingress_application_gateway[0].ingress_application_gateway_identity[0].client_id
-  depends_on           = [azurerm_application_gateway.network]
+  scope                            = azurerm_application_gateway.network.id
+  role_definition_name             = "Contributor"
+  principal_id                     = azurerm_kubernetes_cluster.k8s.ingress_application_gateway[0].ingress_application_gateway_identity[0].client_id
+  depends_on                       = [azurerm_application_gateway.network]
+  skip_service_principal_aad_check = true
 }
