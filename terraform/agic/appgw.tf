@@ -9,6 +9,13 @@ resource "azurerm_public_ip" "test" {
   tags = var.tags
 }
 
+resource "azurerm_user_assigned_identity" "identity_uami" {
+  location            = azurerm_resource_group.rg.location
+  name                = "appgw-uami"
+  resource_group_name = azurerm_resource_group.rg.name
+
+}
+
 resource "azurerm_application_gateway" "network" {
   name                = var.app_gateway_name
   resource_group_name = azurerm_resource_group.rg.name
@@ -18,6 +25,13 @@ resource "azurerm_application_gateway" "network" {
     name     = var.app_gateway_sku
     tier     = "Standard_v2"
     capacity = 2
+  }
+
+  identity {
+    type = "UserAssigned"
+    identity_ids = [
+      azurerm_user_assigned_identity.identity_uami.id
+    ]
   }
 
   gateway_ip_configuration {
