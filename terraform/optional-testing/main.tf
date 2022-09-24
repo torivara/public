@@ -13,6 +13,15 @@ provider "azurerm" {
   features {}
 }
 
+resource "azurerm_resource_group" "example1" {
+  location = "norwayeast"
+  name     = "example1-rg"
+}
+
+resource "azurerm_resource_group" "example2" {
+  location = "norwayeast"
+  name     = "example2-rg"
+}
 
 module "storage_accounts" {
   source = "./modules/storage"

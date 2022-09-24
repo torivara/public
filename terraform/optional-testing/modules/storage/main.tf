@@ -14,7 +14,7 @@ provider "azurerm" {
 }
 
 locals {
-  default_resource_group_name             = "example-rg"
+  default_resource_group_name             = azurerm_resource_group.default.name
   default_location                        = "norwayeast"
   default_account_kind                    = "StorageV2"
   default_account_tier                    = "Standard"
@@ -22,6 +22,11 @@ locals {
   default_enable_https_traffic_only       = true
   default_allow_nested_items_to_be_public = false
   default_min_tls_version                 = "TLS1_2"
+}
+
+resource "azurerm_resource_group" "default" {
+  location = "norwayeast"
+  name     = "example-default-rg"
 }
 
 variable "input" {
@@ -38,21 +43,6 @@ variable "input" {
       min_tls_version                 = optional(string)
     })
   )
-}
-
-resource "azurerm_resource_group" "example1" {
-  location = "norwayeast"
-  name     = "example1-rg"
-}
-
-resource "azurerm_resource_group" "example2" {
-  location = "norwayeast"
-  name     = "example2-rg"
-}
-
-resource "azurerm_resource_group" "default" {
-  location = "norwayeast"
-  name     = "example-default-rg"
 }
 
 resource "azurerm_storage_account" "storeacc" {
