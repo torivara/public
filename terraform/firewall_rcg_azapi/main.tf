@@ -6,6 +6,10 @@ terraform {
   }
 }
 
+provider "azurerm" {
+  features {}
+}
+
 locals {
   policy_array         = split("/", var.firewall_policy_id)
   firewall_policy_name = local.policy_array[8]
