@@ -23,6 +23,12 @@ variable "api_version" {
   default     = "2021-08-01"
 }
 
+variable "firewall_rule_collection_group_name" {
+  type        = string
+  description = "Name of your firewall rule collection group. Defaults to 'default'."
+  default     = "default"
+}
+
 data "azurerm_firewall_policy" "fwpolicy" {
   name                = local.firewall_policy_name
   resource_group_name = local.resource_group_name
