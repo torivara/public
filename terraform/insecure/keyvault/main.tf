@@ -1,5 +1,9 @@
 provider "azurerm" {
   features {}
+  subscription_id = "00000000-0000-0000-0000-000000000000"
+  client_id       = "00000000-0000-0000-0000-000000000000"
+  client_secret   = "insecure_client_secret_1234"
+  tenant_id       = "00000000-0000-0000-0000-000000000000"
 }
 
 resource "azurerm_resource_group" "rg" {
