@@ -7,11 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  sample:
+  scan:
 
     # MSDO runs on windows-latest and ubuntu-latest.
     # macos-latest supporting coming soon
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
