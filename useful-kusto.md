@@ -2,6 +2,8 @@
 
 ## Azure Firewall
 
+### All traffic
+
 [Source](https://gist.github.com/marknettle/13fd0c49fe9eeb400572b279790f78bf)
 
 ```kusto
@@ -22,6 +24,58 @@ AzureDiagnostics
        extract(@" Rule: (.*)",1,msg_s)
       ,extract("No rule matched",0,msg_s))
     ,reason =     extract(@" Reason: (.*)",1,msg_s)
+| project TimeGenerated,Category,proto,src_host,src_port,dest_host,dest_port,action,rule_coll,rule,reason,msg_s
+```
+
+### Denied traffic from specified host
+
+This excludes dns proxy traffic to reduce result noise.
+
+```kusto
+AzureDiagnostics
+| where ResourceType == "AZUREFIREWALLS" and Category != "AzureFirewallDnsProxy"
+| extend
+     proto =      extract(@"^([A-Z]+) ",1,msg_s)
+    ,src_host =   extract(@"request from ([\d\.]*)",1,msg_s)
+    ,src_port =   extract(@"request from [\d\.]*:(\d+)",1,msg_s)
+    ,dest_host =  extract(@" to ([-\w\.]+)(:|\. |\.$)",1,msg_s)
+    ,dest_port =  extract(@" to [-\w\.]+:(\d+)",1,msg_s)
+    ,action =     iif(
+       msg_s has "was denied"
+      ,"Deny"
+      ,extract(@" Action: (\w+)",1,msg_s))
+    ,rule_coll =  extract(@" Rule Collection: (\w+)",1,msg_s)
+    ,rule =       coalesce(
+       extract(@" Rule: (.*)",1,msg_s)
+      ,extract("No rule matched",0,msg_s))
+    ,reason =     extract(@" Reason: (.*)",1,msg_s)
+| where src_host == "10.0.0.1"
+| project TimeGenerated,Category,proto,src_host,src_port,dest_host,dest_port,action,rule_coll,rule,reason,msg_s
+```
+
+### Denied traffic to specified fqdn from specified host
+
+This excludes dns proxy traffic to reduce result noise.
+
+```kusto
+AzureDiagnostics
+| where ResourceType == "AZUREFIREWALLS" and Category != "AzureFirewallDnsProxy"
+| extend
+     proto =      extract(@"^([A-Z]+) ",1,msg_s)
+    ,src_host =   extract(@"request from ([\d\.]*)",1,msg_s)
+    ,src_port =   extract(@"request from [\d\.]*:(\d+)",1,msg_s)
+    ,dest_host =  extract(@" to ([-\w\.]+)(:|\. |\.$)",1,msg_s)
+    ,dest_port =  extract(@" to [-\w\.]+:(\d+)",1,msg_s)
+    ,action =     iif(
+       msg_s has "was denied"
+      ,"Deny"
+      ,extract(@" Action: (\w+)",1,msg_s))
+    ,rule_coll =  extract(@" Rule Collection: (\w+)",1,msg_s)
+    ,rule =       coalesce(
+       extract(@" Rule: (.*)",1,msg_s)
+      ,extract("No rule matched",0,msg_s))
+    ,reason =     extract(@" Reason: (.*)",1,msg_s)
+| where src_host == "10.0.0.1" and dest_host == "www.google.com"
 | project TimeGenerated,Category,proto,src_host,src_port,dest_host,dest_port,action,rule_coll,rule,reason,msg_s
 ```
 
