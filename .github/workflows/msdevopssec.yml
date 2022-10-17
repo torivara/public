@@ -25,6 +25,8 @@ jobs:
       # Run analyzers
       - name: Run Microsoft Security DevOps Analysis
         uses: microsoft/security-devops-action@preview
+        env:
+          terrascan_SkipRules: "AC_AZURE_0389,AC_K8S_0069"
         id: msdo
 
       # Upload alerts to the Security tab
