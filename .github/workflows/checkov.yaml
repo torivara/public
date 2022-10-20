@@ -22,7 +22,7 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: terraform
-          quiet: false # optional: display only failed checks
+          quiet: true # optional: display only failed checks
           framework: terraform
           download_external_modules: false
       - name: Upload alerts to Security tab
