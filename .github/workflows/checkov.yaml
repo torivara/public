@@ -25,3 +25,7 @@ jobs:
           quiet: false # optional: display only failed checks
           framework: terraform
           download_external_modules: false
+      - name: Upload alerts to Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: results.sarif
