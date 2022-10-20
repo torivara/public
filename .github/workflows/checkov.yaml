@@ -1,0 +1,23 @@
+name: Run checkov Terraform scan
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: terraform
+          quiet: false # optional: display only failed checks
+          framework: terraform
+          download_external_modules: false
