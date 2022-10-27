@@ -181,6 +181,16 @@ Usage
 
 [Source](https://learn.microsoft.com/en-us/azure/application-gateway/log-analytics)
 
+### Fairly quick WAF block or matched summary
+
+```kusto
+AzureDiagnostics 
+| where TimeGenerated > ago(1d)
+| where ResourceProvider == "MICROSOFT.NETWORK" and Category == "ApplicationGatewayFirewallLog"
+| where action_s == "Blocked" or action_s == "Matched"
+| summarize count() by ruleGroup_s, ruleId_s, requestUri_s, Message, hostname_s
+```
+
 ### Matched rules for hostname by rule group and id (for WAF exclusion) last day
 
 ```kusto
