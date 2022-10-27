@@ -1,5 +1,8 @@
 # Some useful Kusto queries
 
+- [IPv4 addresses index operator](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/datatypes-string-operators#operators-on-ipv4-addresses)
+- [Query best practices](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/best-practices)
+
 ## Azure Firewall
 
 ### All traffic
