@@ -1,0 +1,73 @@
+name: (Prod) TF Apply
+on:
+  workflow_call:
+    inputs:
+      workingDir:
+        type: string
+        description: "Base directory to run tf commands in"
+        required: false
+        default: "./"
+      environment:
+        type: string
+        description: "Default: 'production'"
+        required: false
+        default: "production"
+      optionalVarFile:
+        type: string
+        description: "Default: 'null'"
+        required: false
+        default: "null"
+      tfVersion:
+        type: string
+        description: "(Optional) Defaults to latest TF version. Inputting Semver ranges are supported."
+        required: false
+        default: "latest"
+
+env:
+  # Used by all workflows
+  ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
+  ARM_USE_OIDC: true
+  ARM_TENANT_ID: "b14e987f-e475-4c62-b480-44f3383c18d3" # fake
+
+jobs:
+  plan:
+    # FOR OIDC
+    permissions:
+      id-token: write
+      contents: read
+    name: Terraform Apply
+
+    runs-on: "ubuntu-latest"
+    defaults:
+      run:
+        working-directory: ${{ inputs.workingDir }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+        with:
+          terraform_version: ${{ inputs.tfVersion }}
+
+      - name: terraform init
+        id: init
+        run: terraform init
+
+      - name: terraform validate
+        if: github.event_name == 'workflow_dispatch'
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Apply with varFile specified
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: "${{ inputs.optionalVarFile != 'null'}}"
+        run: terraform apply -var-file=${{ inputs.optionalVarFile }} -parallelism=${{ inputs.tfParallelism }} -auto-approve
+
+      - name: Terraform Apply without varFile specified
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: "${{ inputs.optionalVarFile == 'null'}}"
+        run: terraform apply -parallelism=${{ inputs.tfParallelism }} -auto-approve
