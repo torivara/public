@@ -14,7 +14,7 @@ on:
 jobs:
   plan:
     if: "${{ github.event_name == 'pull_request' }}"
-    uses: torivara/reusable-templates/.github/workflows/terraform-plan.yaml@main
+    uses: torivara/public/.github/workflows/plan.yml@main
     with:
       environment: production
       workingDir: ./
@@ -24,7 +24,7 @@ jobs:
 
   apply:
     if: "${{ github.ref == 'refs/heads/main' && github.event_name == 'push'}}"
-    uses: torivara/reusable-templates/.github/workflows/terraform-apply.yaml@main
+    uses: torivara/public/.github/workflows/apply.yml@master
     with:
       environment: production
       workingDir: ./
