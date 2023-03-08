@@ -15,6 +15,7 @@ resource "azurerm_resource_group" "rg" {
 data "azurerm_subscription" "primary" {
 }
 
+#tfsec:ignore:azure-keyvault-specify-network-acl
 resource "azurerm_key_vault" "example" {
   name                        = "examplekeyvault"
   location                    = azurerm_resource_group.rg.location

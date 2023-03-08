@@ -10,11 +10,11 @@ param (
     [Parameter(Mandatory=$true)]
     [string]$rgName,
     [Parameter(Mandatory=$false)]
-    [bool]$dryrun=$true,
-    [Parameter(Mandatory=$false)]
     [string]$vnetName,
     [Parameter(Mandatory=$false)]
-    [string]$pipName
+    [string]$pipName,
+    [Parameter(Mandatory=$false)]
+    [string]$managedIdentity=""
 
 )
 # Install required modules
@@ -40,11 +40,12 @@ if (-not (Get-Module -Name "Az.Network")) {
 #>
 $context = Get-AzContext
 if (-not $context.Tenant) {
-  Connect-AzAccount
+  if ($managedIdentity -ne "") {
+    Connect-AzAccount -Identity
+  } else {
+    Connect-AzAccount
+  }
   Set-AzContext -Subscription $subscription
-} else {
-  Write-Host "Subscription: $($context.Subscription.Name) ($($context.Subscription.Id))"
-  Write-Host "Tenant: $($context.Tenant.Id)"
 }
 
 # Get the firewall object into a variable
@@ -52,24 +53,11 @@ $azfw = Get-AzFirewall -Name $fwName -ResourceGroupName $rgName
 
 # Process firewall allocate or deallocate
 if ($mode -eq "deallocate" -and $azFw) {
-  if ($dryrun){
-    Write-Host "Would stop and deallocate firewall"
-  } else {
-    $azfw.Deallocate()
-    Set-AzFirewall -AzureFirewall $azfw
-  }
+  $azfw.Deallocate()
+  Set-AzFirewall -AzureFirewall $azfw
 } elseif ($mode -eq "allocate" -and $azFw) {
-  if ($dryrun){
-    Write-Host "Would start and allocate firewall"
-  } else {
-    $vnet = Get-AzVirtualNetwork -ResourceGroupName $rgName -Name $vnetName
-    $pip = Get-AzPublicIpAddress -ResourceGroupName $rgName -Name $pipName
-    $azFw.Allocate($vnet, $pip)
-    Set-AzFirewall -AzureFirewall $azfw
-  }
+  $vnet = Get-AzVirtualNetwork -ResourceGroupName $rgName -Name $vnetName
+  $pip = Get-AzPublicIpAddress -ResourceGroupName $rgName -Name $pipName
+  $azFw.Allocate($vnet, $pip)
+  Set-AzFirewall -AzureFirewall $azfw
 }
-
-<#
-  Send the local variable with deallocated firewall setting to Azure
-  This will stop your firewall, and stop your running cost for it
-#>
