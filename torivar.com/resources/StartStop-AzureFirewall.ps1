@@ -16,10 +16,6 @@ param (
     [Parameter(Mandatory=$false)]
     [string]$managedIdentity="",
     [Parameter(Mandatory=$false)]
-    [string]$vhubName,
-    [Parameter(Mandatory=$false)]
-    [string]$managedIdentity=""
-
 )
 # Install required modules
 if (-not (Get-Module -Name "Az.Accounts" -ListAvailable)) {
