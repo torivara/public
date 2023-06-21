@@ -14,6 +14,10 @@ param (
     [Parameter(Mandatory=$false)]
     [string]$pipName,
     [Parameter(Mandatory=$false)]
+    [string]$managedIdentity="",
+    [Parameter(Mandatory=$false)]
+    [string]$vhubName,
+    [Parameter(Mandatory=$false)]
     [string]$managedIdentity=""
 
 )
@@ -56,7 +60,7 @@ $azfw = Get-AzFirewall -Name $fwName -ResourceGroupName $rgName
 
 # Process firewall allocate or deallocate
 if ($mode -eq "deallocate" -and $azFw) {
-  if ($azFw.IpConfigurations.Count -gt 0) {
+  if ($azFw.IpConfigurations.Count -gt 0 -or $azFw.HubIPAddresses.Count -gt 0) {
     Write-Output "Deallocating firewall."
     $azfw.Deallocate()
     Set-AzFirewall -AzureFirewall $azfw
@@ -65,7 +69,7 @@ if ($mode -eq "deallocate" -and $azFw) {
   }
   
 } elseif ($mode -eq "allocate" -and $azFw) {
-  if ($azFw.IpConfigurations.Count -eq 0) {
+  if ($azFw.IpConfigurations.Count -gt 0 -or $azFw.HubIPAddresses.Count -gt 0) {
     Write-Output "Allocating firewall."
     $vnet = Get-AzVirtualNetwork -ResourceGroupName $rgName -Name $vnetName
     $pip = Get-AzPublicIpAddress -ResourceGroupName $rgName -Name $pipName
