@@ -28,8 +28,11 @@ jobs:
           ignore_on_exit: results
           # file path to store result in json format
           output_path: results_dir
+          # output to json and sarif
+          output_formats: 'json,sarif'
       - name: display kics results
         run: |
+          cat results-dir/results.sarif
           cat results-dir/results.json
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v1
