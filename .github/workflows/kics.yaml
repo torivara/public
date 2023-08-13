@@ -1,0 +1,37 @@
+name: Run KICS Terraform scan
+on:
+  push:
+    branches: [ master ]
+    paths:
+    - "terraform/**"
+  pull_request:
+    branches: [ master ]
+    paths:
+    - "terraform/**"
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Mkdir results-dir
+        # make sure results dir is created
+        run: mkdir -p results-dir
+      - name: KICS Github Action
+        uses: Checkmarx/kics-github-action@v1.6
+        with:
+          # path to file or directory to scan
+          path: 'terraform'
+          # don't fail on results
+          ignore_on_exit: results
+          # file path to store result in json format
+          output_path: results_dir
+      - name: display kics results
+        run: |
+          cat results-dir/results.json
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: results-dir/results.sarif
