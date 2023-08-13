@@ -6,6 +6,7 @@ variable "input" {
   type        = any
   description = "This is an input variable to your terraform code. Write whatever here."
   default     = "Hello world!"
+  sensitive   = false
 }
 
 output "output" {
