@@ -27,7 +27,7 @@ jobs:
           # don't fail on results
           ignore_on_exit: results
           # file path to store result in json format
-          output_path: results_dir
+          output_path: results-dir
           # output to json and sarif
           output_formats: 'json,sarif'
       - name: display kics results
