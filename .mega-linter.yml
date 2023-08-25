@@ -25,9 +25,6 @@ DISABLE_ERRORS_LINTERS:
   - SPELL_MISSPELL
   - SPELL_VALE
 
-GITHUB_STATUS_REPORTER: true
-GITHUB_COMMENT_REPORTER: true
-
 PRE_COMMANDS:
   - command: echo "This is MegaLinter PRE_COMMAND on own MegaLinter ! :)"
     cwd: "root"
