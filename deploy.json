@@ -54,7 +54,9 @@
               "kind": "StorageV2"
             }
           ],
-          "outputs": {}
+          "outputs": {
+            "test": "value"
+          }
         }
       }
     }

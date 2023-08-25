@@ -57,3 +57,5 @@ resource "azurerm_storage_account" "storeacc" {
   allow_nested_items_to_be_public = each.value.allow_nested_items_to_be_public != null ? each.value.allow_nested_items_to_be_public : local.default_allow_nested_items_to_be_public
   min_tls_version                 = each.value.min_tls_version != null ? each.value.min_tls_version : local.default_min_tls_version
 }
+
+# trigger
