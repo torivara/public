@@ -1,0 +1,857 @@
+Results of terrascan linter (version 1.18.2)
+See documentation on https://megalinter.io/7.3.0/descriptors/terraform_terrascan/
+-----------------------------------------------
+
+❌ [ERROR] for workspace /github/workspace
+Linter raw log:
+2023/08/25 13:24:24 [DEBUG] GET https://registry.terraform.io/v1/providers/hashicorp/random/versions
+2023-08-25T13:24:25.090Z	warn	commons/terraform-provider.go:161	failed to parse provider version: invalid sequence "=" at start of specification
+2023-08-25T13:24:25.091Z	warn	commons/terraform-provider.go:161	failed to parse provider version: invalid sequence "=" at start of specification
+2023-08-25T13:24:25.091Z	warn	commons/terraform-provider.go:161	failed to parse provider version: invalid sequence "=" at start of specification
+2023-08-25T13:24:25.091Z	warn	commons/terraform-provider.go:161	failed to parse provider version: invalid sequence "=" at start of specification
+2023-08-25T13:24:25.091Z	warn	commons/terraform-provider.go:161	failed to parse provider version: invalid sequence "=" at start of specification
+2023-08-25T13:24:25.091Z	warn	commons/terraform-provider.go:161	failed to parse provider version: invalid sequence "=" at start of specification
+2023-08-25T13:24:25.092Z	warn	commons/terraform-provider.go:161	failed to parse provider version: invalid sequence "=" at start of specification
+2023-08-25T13:24:25.092Z	warn	commons/terraform-provider.go:161	failed to parse provider version: invalid sequence "=" at start of specification
+2023-08-25T13:24:25.092Z	warn	commons/terraform-provider.go:161	failed to parse provider version: invalid sequence "=" at start of specification
+2023/08/25 13:24:25 [DEBUG] GET https://registry.terraform.io/v1/providers/hashicorp/azurerm/versions
+2023/08/25 13:24:25 [DEBUG] GET https://registry.terraform.io/v1/providers/azure/azapi/versions
+2023-08-25T13:24:25.204Z	error	utils/dir.go:64	directory terraform/functionapp/modules/app/examples/modules/app does not exist.
+2023-08-25T13:24:25.214Z	warn	commons/load-dir.go:170	failed to build unified config. errors:
+<nil>: Failed to read module directory; Module directory terraform/functionapp/modules/app/examples/modules/app does not exist or cannot be read.
+
+2023-08-25T13:24:25.220Z	warn	commons/load-dir.go:170	failed to build unified config. errors:
+terraform/optional-testing/modules/storage/main.tf:32,1-17: Optional object type attributes are experimental; This feature is currently an opt-in experiment, subject to change in future releases based on feedback.
+
+Activate the feature for this module by adding module_variable_optional_attrs to the list of active experiments.
+
+2023-08-25T13:24:25.221Z	warn	commons/load-dir.go:170	failed to build unified config. errors:
+terraform/optional-testing/modules/storage/main.tf:32,1-17: Optional object type attributes are experimental; This feature is currently an opt-in experiment, subject to change in future releases based on feedback.
+
+Activate the feature for this module by adding module_variable_optional_attrs to the list of active experiments.
+
+
+
+Scan Errors -
+
+	IaC Type            :	terraform
+	Directory           :	terraform/functionapp/modules/app/examples
+	Error Message       :	diagnostic errors while loading terraform config dir 'terraform/functionapp/modules/app/examples'. error from terraform:
+terraform/functionapp/modules/app/examples/full.tf:1,1-21: Duplicate module call; A module call named "functionapp" was already defined at terraform/functionapp/modules/app/examples/byo-workspace.tf:1,1-21. Module calls must have unique names within a module.
+terraform/functionapp/modules/app/examples/simple.tf:1,1-21: Duplicate module call; A module call named "functionapp" was already defined at terraform/functionapp/modules/app/examples/full.tf:1,1-21. Module calls must have unique names within a module.
+
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/moved-block
+	Error Message       :	diagnostic errors while loading terraform config dir 'terraform/moved-block'. error from terraform:
+terraform/moved-block/main.tf:34,1-6: Unsupported block type; Blocks of type "moved" are not expected here.
+
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/optional-testing/modules/storage
+	Error Message       :	diagnostic errors while loading terraform config dir 'terraform/optional-testing/modules/storage'. error from terraform:
+terraform/optional-testing/modules/storage/main.tf:32,1-17: Optional object type attributes are experimental; This feature is currently an opt-in experiment, subject to change in future releases based on feedback.
+
+Activate the feature for this module by adding module_variable_optional_attrs to the list of active experiments.
+
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	/github/workspace
+	Error Message       :	directory '/github/workspace' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	megalinter-reports
+	Error Message       :	directory 'megalinter-reports' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	megalinter-reports/copy-paste
+	Error Message       :	directory 'megalinter-reports/copy-paste' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	megalinter-reports/copy-paste/html
+	Error Message       :	directory 'megalinter-reports/copy-paste/html' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	megalinter-reports/copy-paste/html/js
+	Error Message       :	directory 'megalinter-reports/copy-paste/html/js' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	megalinter-reports/copy-paste/html/styles
+	Error Message       :	directory 'megalinter-reports/copy-paste/html/styles' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	megalinter-reports/linters_logs
+	Error Message       :	directory 'megalinter-reports/linters_logs' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform
+	Error Message       :	directory 'terraform' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/auth-examples
+	Error Message       :	directory 'terraform/auth-examples' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/auth-examples/run-local
+	Error Message       :	directory 'terraform/auth-examples/run-local' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/auth-examples/run-remote
+	Error Message       :	directory 'terraform/auth-examples/run-remote' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/functionapp/modules
+	Error Message       :	directory 'terraform/functionapp/modules' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/functionapp/src
+	Error Message       :	directory 'terraform/functionapp/src' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/functionapp/src/cleanEmptyResourceGroups
+	Error Message       :	directory 'terraform/functionapp/src/cleanEmptyResourceGroups' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/insecure
+	Error Message       :	directory 'terraform/insecure' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/optional-testing/modules
+	Error Message       :	directory 'terraform/optional-testing/modules' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/tf-testing
+	Error Message       :	directory 'terraform/tf-testing' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	torivar.com
+	Error Message       :	directory 'torivar.com' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	torivar.com/resources
+	Error Message       :	directory 'torivar.com/resources' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	torivar.com/resources/bicep
+	Error Message       :	directory 'torivar.com/resources/bicep' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	torivar.com/resources/customrbacrole
+	Error Message       :	directory 'torivar.com/resources/customrbacrole' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	torivar.com/resources/vmtemplate
+	Error Message       :	directory 'torivar.com/resources/vmtemplate' has no terraform config files
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/optional-testing
+	Error Message       :	failed to build unified config. errors:
+terraform/optional-testing/modules/storage/main.tf:32,1-17: Optional object type attributes are experimental; This feature is currently an opt-in experiment, subject to change in future releases based on feedback.
+
+Activate the feature for this module by adding module_variable_optional_attrs to the list of active experiments.
+
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/moved-block
+	Error Message       :	failed to build unified config. errors:
+terraform/optional-testing/modules/storage/main.tf:32,1-17: Optional object type attributes are experimental; This feature is currently an opt-in experiment, subject to change in future releases based on feedback.
+
+Activate the feature for this module by adding module_variable_optional_attrs to the list of active experiments.
+
+	
+	-----------------------------------------------------------------------
+	
+	IaC Type            :	terraform
+	Directory           :	terraform/functionapp/modules/app/examples
+	Error Message       :	failed to build unified config. errors:
+<nil>: Failed to read module directory; Module directory terraform/functionapp/modules/app/examples/modules/app does not exist or cannot be read.
+
+	
+	-----------------------------------------------------------------------
+	
+
+
+Violation Details -
+    
+	Description    :	Ensure that Azure Virtual Network subnet is configured with a Network Security Group
+	File           :	terraform/agic/network.tf
+	Module Name    :	root
+	Plan Root      :	terraform/agic
+	Line           :	16
+	Severity       :	MEDIUM
+	Rule Name      :	reme_noSecurityGroupAssociated
+	Rule ID        :	AC_AZURE_0356
+	Resource Name  :	appgwsubnet
+	Resource Type  :	azurerm_subnet
+	Category       :	Infrastructure Security
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Virtual Network subnet is configured with a Network Security Group
+	File           :	terraform/appgateway/network.tf
+	Module Name    :	root
+	Plan Root      :	terraform/appgateway
+	Line           :	20
+	Severity       :	MEDIUM
+	Rule Name      :	reme_noSecurityGroupAssociated
+	Rule ID        :	AC_AZURE_0356
+	Resource Name  :	example
+	Resource Type  :	azurerm_subnet
+	Category       :	Infrastructure Security
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Virtual Network subnet is configured with a Network Security Group
+	File           :	terraform/functionapp/modules/app/network.tf
+	Module Name    :	functionapp-dev
+	Plan Root      :	terraform/functionapp
+	Line           :	9
+	Severity       :	MEDIUM
+	Rule Name      :	reme_noSecurityGroupAssociated
+	Rule ID        :	AC_AZURE_0356
+	Resource Name  :	integration-subnet
+	Resource Type  :	azurerm_subnet
+	Category       :	Infrastructure Security
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Virtual Network subnet is configured with a Network Security Group
+	File           :	terraform/functionapp/modules/app/network.tf
+	Module Name    :	root
+	Plan Root      :	terraform/functionapp/modules/app
+	Line           :	9
+	Severity       :	MEDIUM
+	Rule Name      :	reme_noSecurityGroupAssociated
+	Rule ID        :	AC_AZURE_0356
+	Resource Name  :	integration-subnet
+	Resource Type  :	azurerm_subnet
+	Category       :	Infrastructure Security
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Virtual Network subnet is configured with a Network Security Group
+	File           :	terraform/agic/network.tf
+	Module Name    :	root
+	Plan Root      :	terraform/agic
+	Line           :	9
+	Severity       :	MEDIUM
+	Rule Name      :	reme_noSecurityGroupAssociated
+	Rule ID        :	AC_AZURE_0356
+	Resource Name  :	kubesubnet
+	Resource Type  :	azurerm_subnet
+	Category       :	Infrastructure Security
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Virtual Network subnet is configured with a Network Security Group
+	File           :	terraform/agic/network.tf
+	Module Name    :	root
+	Plan Root      :	terraform/agic
+	Line           :	23
+	Severity       :	MEDIUM
+	Rule Name      :	reme_noSecurityGroupAssociated
+	Rule ID        :	AC_AZURE_0356
+	Resource Name  :	mgmtsubnet
+	Resource Type  :	azurerm_subnet
+	Category       :	Infrastructure Security
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Virtual Network subnet is configured with a Network Security Group
+	File           :	terraform/insecure/vm/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/insecure/vm
+	Line           :	17
+	Severity       :	MEDIUM
+	Rule Name      :	reme_noSecurityGroupAssociated
+	Rule ID        :	AC_AZURE_0356
+	Resource Name  :	subnet1
+	Resource Type  :	azurerm_subnet
+	Category       :	Infrastructure Security
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Virtual Network subnet is configured with a Network Security Group
+	File           :	terraform/tf-testing/service-plan/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/tf-testing/service-plan
+	Line           :	44
+	Severity       :	MEDIUM
+	Rule Name      :	reme_noSecurityGroupAssociated
+	Rule ID        :	AC_AZURE_0356
+	Resource Name  :	subnet1
+	Resource Type  :	azurerm_subnet
+	Category       :	Infrastructure Security
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Virtual Network subnet is configured with a Network Security Group
+	File           :	terraform/vnet-testing/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/vnet-testing
+	Line           :	15
+	Severity       :	MEDIUM
+	Rule Name      :	reme_noSecurityGroupAssociated
+	Rule ID        :	AC_AZURE_0356
+	Resource Name  :	subnet1
+	Resource Type  :	azurerm_subnet
+	Category       :	Infrastructure Security
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Virtual Network subnet is configured with a Network Security Group
+	File           :	terraform/vnet-testing/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/vnet-testing
+	Line           :	26
+	Severity       :	MEDIUM
+	Rule Name      :	reme_noSecurityGroupAssociated
+	Rule ID        :	AC_AZURE_0356
+	Resource Name  :	subnet2
+	Resource Type  :	azurerm_subnet
+	Category       :	Infrastructure Security
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure Azure Application Gateway Web application firewall (WAF) is enabled
+	File           :	terraform/agic/appgw.tf
+	Module Name    :	root
+	Plan Root      :	terraform/agic
+	Line           :	19
+	Severity       :	MEDIUM
+	Rule Name      :	reme_appGatewayWAFEnabled
+	Rule ID        :	AC_AZURE_0189
+	Resource Name  :	network
+	Resource Type  :	azurerm_application_gateway
+	Category       :	Infrastructure Security
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure Azure Application Gateway Web application firewall (WAF) is enabled
+	File           :	terraform/appgateway/gateway.tf
+	Module Name    :	root
+	Plan Root      :	terraform/appgateway
+	Line           :	14
+	Severity       :	MEDIUM
+	Rule Name      :	reme_appGatewayWAFEnabled
+	Rule ID        :	AC_AZURE_0189
+	Resource Name  :	network
+	Resource Type  :	azurerm_application_gateway
+	Category       :	Infrastructure Security
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/optional-testing/modules/storage/main.tf
+	Module Name    :	storage_accounts
+	Plan Root      :	terraform/moved-block
+	Line           :	27
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	default
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/appgateway/network.tf
+	Module Name    :	root
+	Plan Root      :	terraform/appgateway
+	Line           :	8
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	example
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/optional-testing/main.tf
+	Module Name    :	storage_account
+	Plan Root      :	terraform/moved-block
+	Line           :	16
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	example1
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/optional-testing/main.tf
+	Module Name    :	storage_account
+	Plan Root      :	terraform/moved-block
+	Line           :	21
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	example2
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/functionapp/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/functionapp
+	Line           :	20
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	identity-rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/agic/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/agic
+	Line           :	5
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/auth-examples/run-local/azcli/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/auth-examples/run-local/azcli
+	Line           :	29
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/auth-examples/run-local/envvars/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/auth-examples/run-local/envvars
+	Line           :	26
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/auth-examples/run-local/plaintext/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/auth-examples/run-local/plaintext
+	Line           :	48
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/auth-examples/run-remote/azuread/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/auth-examples/run-remote/azuread
+	Line           :	26
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/auth-examples/run-remote/envvars/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/auth-examples/run-remote/envvars
+	Line           :	26
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/auth-examples/run-remote/oidc/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/auth-examples/run-remote/oidc
+	Line           :	29
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/automationaccount/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/automationaccount
+	Line           :	13
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/eventhub_diagsettings/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/eventhub_diagsettings
+	Line           :	27
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/functionapp/modules/app/main.tf
+	Module Name    :	functionapp-dev
+	Plan Root      :	terraform/functionapp
+	Line           :	10
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/functionapp/modules/app/main.tf
+	Module Name    :	functionapp-test
+	Plan Root      :	terraform/functionapp
+	Line           :	10
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/functionapp/modules/app/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/functionapp/modules/app
+	Line           :	10
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/insecure/appservice/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/insecure/appservice
+	Line           :	5
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/insecure/keyvault/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/insecure/keyvault
+	Line           :	10
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/insecure/role/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/insecure/role
+	Line           :	5
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/insecure/vm/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/insecure/vm
+	Line           :	5
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/logicapp/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/logicapp
+	Line           :	33
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/moved-block/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/moved-block
+	Line           :	16
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/tf-testing/service-plan/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/tf-testing/service-plan
+	Line           :	24
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/vnet-testing/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/vnet-testing
+	Line           :	1
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/auth-examples/run-remote/advanced/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/auth-examples/run-remote/advanced
+	Line           :	56
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg-default
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/auth-examples/run-remote/advanced/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/auth-examples/run-remote/advanced
+	Line           :	49
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg-mgmt
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	terraform/auth-examples/run-remote/advanced/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/auth-examples/run-remote/advanced
+	Line           :	42
+	Severity       :	LOW
+	Rule Name      :	reme_resourceGroupLock
+	Rule ID        :	AC_AZURE_0389
+	Resource Name  :	rg-network
+	Resource Type  :	azurerm_resource_group
+	Category       :	Identity and Access Management
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that logging for Azure KeyVault is 'Enabled'
+	File           :	terraform/insecure/keyvault/main.tf
+	Module Name    :	root
+	Plan Root      :	terraform/insecure/keyvault
+	Line           :	19
+	Severity       :	HIGH
+	Rule Name      :	reme_keyVaultAuditLoggingEnabled
+	Rule ID        :	AC_AZURE_0169
+	Resource Name  :	example
+	Resource Type  :	azurerm_key_vault
+	Category       :	Logging and Monitoring
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that logging for Azure KeyVault is 'Enabled'
+	File           :	terraform/functionapp/modules/app/key_vault.tf
+	Module Name    :	functionapp-dev
+	Plan Root      :	terraform/functionapp
+	Line           :	1
+	Severity       :	HIGH
+	Rule Name      :	reme_keyVaultAuditLoggingEnabled
+	Rule ID        :	AC_AZURE_0169
+	Resource Name  :	kv
+	Resource Type  :	azurerm_key_vault
+	Category       :	Logging and Monitoring
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that logging for Azure KeyVault is 'Enabled'
+	File           :	terraform/functionapp/modules/app/key_vault.tf
+	Module Name    :	functionapp-test
+	Plan Root      :	terraform/functionapp
+	Line           :	1
+	Severity       :	HIGH
+	Rule Name      :	reme_keyVaultAuditLoggingEnabled
+	Rule ID        :	AC_AZURE_0169
+	Resource Name  :	kv
+	Resource Type  :	azurerm_key_vault
+	Category       :	Logging and Monitoring
+	
+	-----------------------------------------------------------------------
+	
+	Description    :	Ensure that logging for Azure KeyVault is 'Enabled'
+	File           :	terraform/functionapp/modules/app/key_vault.tf
+	Module Name    :	root
+	Plan Root      :	terraform/functionapp/modules/app
+	Line           :	1
+	Severity       :	HIGH
+	Rule Name      :	reme_keyVaultAuditLoggingEnabled
+	Rule ID        :	AC_AZURE_0169
+	Resource Name  :	kv
+	Resource Type  :	azurerm_key_vault
+	Category       :	Logging and Monitoring
+	
+	-----------------------------------------------------------------------
+	
+
+Scan Summary -
+
+	File/Folder         :	/github/workspace
+	IaC Type            :	terraform
+	Scanned At          :	2023-08-25 13:24:27.698198754 +0000 UTC
+	Policies Validated  :	54
+	Violated Policies   :	44
+	Low                 :	28
+	Medium              :	12
+	High                :	4
+	
+
+
