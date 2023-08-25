@@ -1,0 +1,24 @@
+APPLY_FIXES: all
+DISABLE:
+  - CLOUDFORMATION
+  - CSS
+  - EDITORCONFIG
+  - JAVASCRIPT
+  - TEKTON
+DISABLE_LINTERS:
+  - REPOSITORY_GITLEAKS
+  - REPOSITORY_KICS
+  - SPELL_PROSELINT
+  - SPELL_MISSPELL
+  - SPELL_VALE
+  - REPOSITORY_TRUFFLEHOG
+DISABLE_LINTERS_ERROR:
+  - SPELL
+
+GITHUB_STATUS_REPORTER: false
+PRE_COMMANDS:
+  - command: echo "This is MegaLinter PRE_COMMAND on own MegaLinter ! :)"
+    cwd: "root"
+POST_COMMANDS:
+  - command: echo "This is MegaLinter POST_COMMAND on own MegaLinter ! :)"
+    cwd: "workspace"
