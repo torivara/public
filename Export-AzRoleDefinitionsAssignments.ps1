@@ -111,5 +111,5 @@ $exported | format-table -autosize
 
 if ($exportAssignments) {
     Write-Host "Exporting assignments"
-    $assignmentsList | ConvertTo-Json | Out-File assignments.json -Force
+    $assignmentsList | ConvertTo-Json | Out-File 'output/assignments.json' -Force
 }
