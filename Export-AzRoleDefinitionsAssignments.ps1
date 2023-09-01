@@ -7,7 +7,7 @@ param (
     [Parameter(Mandatory = $false)]
     [String]$excludeRegexPattern,
     [Parameter(Mandatory = $false)]
-    [String]$rolesFolder = "roles",
+    [String]$rolesFolder = "output",
     [Parameter(Mandatory = $false)]
     [Switch]$exportAssignments,
     [Parameter(Mandatory = $false)]
