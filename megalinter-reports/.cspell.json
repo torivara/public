@@ -1,0 +1,34 @@
+{
+    "ignorePaths": [
+        "**/node_modules/**",
+        "**/vscode-extension/**",
+        "**/.git/**",
+        "**/.pnpm-lock.json",
+        ".vscode",
+        "package-lock.json",
+        "megalinter-reports"
+    ],
+    "language": "en",
+    "version": "0.2",
+    "words": [
+        "DEVSKIM",
+        "GITLEAKS",
+        "GRYPE",
+        "KICS",
+        "PROSELINT",
+        "PYRIGHT",
+        "SEMGREP",
+        "TEKTON",
+        "TERRASCAN",
+        "TFLINT",
+        "TRIVY",
+        "TRUFFLEHOG",
+        "appservice",
+        "asdstorage",
+        "azurerm",
+        "norwayeast",
+        "storageaccount",
+        "storeacc",
+        "westeurope"
+    ]
+}

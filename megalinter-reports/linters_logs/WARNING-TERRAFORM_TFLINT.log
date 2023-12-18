@@ -1,0 +1,8 @@
+Results of tflint linter (version 0.47.0)
+See documentation on https://megalinter.io/7.3.0/descriptors/terraform_tflint/
+-----------------------------------------------
+
+❌ [ERROR] for workspace /github/workspace
+Linter raw log:
+Failed to initialize plugins; Plugin `aws` not found. Did you run `tflint --init`?
+

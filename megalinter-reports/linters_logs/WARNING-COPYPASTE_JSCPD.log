@@ -1,0 +1,35 @@
+Results of jscpd linter (version 3.5.9)
+See documentation on https://megalinter.io/7.3.0/descriptors/copypaste_jscpd/
+-----------------------------------------------
+
+❌ [ERROR] for workspace /github/workspace
+Linter raw log:
+Clone found (powershell):
+ - UpdateManagement-TurnOffVMs.ps1 [26:1 - 45:7] (19 lines, 97 tokens)
+   UpdateManagement-TurnOnVMs.ps1 [27:1 - 48:7]
+
+Clone found (powershell):
+ - UpdateManagement-TurnOffVMs.ps1 [55:1 - 74:7] (19 lines, 123 tokens)
+   UpdateManagement-TurnOnVMs.ps1 [63:1 - 82:40]
+
+Clone found (powershell):
+ - UpdateManagement-TurnOffVMs.ps1 [79:1 - 93:7] (14 lines, 123 tokens)
+   UpdateManagement-TurnOnVMs.ps1 [90:1 - 104:85]
+
+┌────────────┬────────────────┬─────────────┬──────────────┬──────────────┬──────────────────┬───────────────────┐
+│ Format     │ Files analyzed │ Total lines │ Total tokens │ Clones found │ Duplicated lines │ Duplicated tokens │
+├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤
+│ powershell │ 13             │ 820         │ 5297         │ 3            │ 52 (6.34%)       │ 343 (6.48%)       │
+├────────────┼────────────────┼─────────────┼──────────────┼──────────────┼──────────────────┼───────────────────┤
+│ Total:     │ 13             │ 820         │ 5297         │ 3            │ 52 (6.34%)       │ 343 (6.48%)       │
+└────────────┴────────────────┴─────────────┴──────────────┴──────────────┴──────────────────┴───────────────────┘
+Found 3 clones.
+HTML report saved to megalinter-reports/copy-paste/html/
+ERROR: jscpd found too many duplicates (6.34%) over threshold (0%)
+Error: ERROR: jscpd found too many duplicates (6.34%) over threshold (0%)
+    at ThresholdReporter.report (/node-deps/node_modules/@jscpd/finder/dist/reporters/threshold.js:12:19)
+    at /node-deps/node_modules/@jscpd/finder/dist/in-files-detector.js:82:26
+    at Array.forEach (<anonymous>)
+    at /node-deps/node_modules/@jscpd/finder/dist/in-files-detector.js:81:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+

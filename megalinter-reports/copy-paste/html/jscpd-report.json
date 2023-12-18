@@ -1,0 +1,302 @@
+{
+  "statistics": {
+    "detectionDate": "2023-08-25T13:23:31.870Z",
+    "formats": {
+      "powershell": {
+        "sources": {
+          "terraform/functionapp/src/cleanEmptyResourceGroups/run.ps1": {
+            "lines": 14,
+            "tokens": 91,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "terraform/functionapp/src/requirements.psd1": {
+            "lines": 5,
+            "tokens": 16,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "terraform/functionapp/src/profile.ps1": {
+            "lines": 19,
+            "tokens": 51,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "torivar.com/resources/remove-managementgroup.ps1": {
+            "lines": 163,
+            "tokens": 1005,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "torivar.com/resources/powershell.ps1": {
+            "lines": 22,
+            "tokens": 162,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "torivar.com/resources/examplerunbook.ps1": {
+            "lines": 19,
+            "tokens": 118,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "torivar.com/resources/StartStop-AzureFirewall.ps1": {
+            "lines": 75,
+            "tokens": 548,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "terraform/spn-testing/script.ps1": {
+            "lines": 6,
+            "tokens": 55,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "UpdateManagement-TurnOnVMs.ps1": {
+            "lines": 137,
+            "tokens": 790,
+            "sources": 1,
+            "clones": 3,
+            "duplicatedLines": 52,
+            "duplicatedTokens": 343,
+            "percentage": 37.96,
+            "percentageTokens": 43.42,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "UpdateManagement-TurnOffVMs.ps1": {
+            "lines": 118,
+            "tokens": 693,
+            "sources": 1,
+            "clones": 3,
+            "duplicatedLines": 52,
+            "duplicatedTokens": 343,
+            "percentage": 44.07,
+            "percentageTokens": 49.49,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "Uninstall-AzModules.ps1": {
+            "lines": 97,
+            "tokens": 819,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "Install-WindowsUpdates_Auto.ps1": {
+            "lines": 120,
+            "tokens": 746,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "Install-WindowsUpdatesV2_Auto.ps1": {
+            "lines": 25,
+            "tokens": 203,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 820,
+          "tokens": 5297,
+          "sources": 13,
+          "clones": 3,
+          "duplicatedLines": 52,
+          "duplicatedTokens": 343,
+          "percentage": 6.34,
+          "percentageTokens": 6.48,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      }
+    },
+    "total": {
+      "lines": 820,
+      "tokens": 5297,
+      "sources": 13,
+      "clones": 3,
+      "duplicatedLines": 52,
+      "duplicatedTokens": 343,
+      "percentage": 6.34,
+      "percentageTokens": 6.48,
+      "newDuplicatedLines": 0,
+      "newClones": 0
+    }
+  },
+  "duplicates": [
+    {
+      "format": "powershell",
+      "lines": 20,
+      "fragment": "param(\n    [string]$SoftwareUpdateConfigurationRunContext\n)\n\n#region BoilerplateAuthentication\n#This requires a RunAs account\n$ServicePrincipalConnection = Get-AutomationConnection -Name 'AzureRunAsConnection'\n\nConnect-AzAccount `\n    -ServicePrincipal `\n    -TenantId $ServicePrincipalConnection.TenantId `\n    -ApplicationId $ServicePrincipalConnection.ApplicationId `\n    -CertificateThumbprint $ServicePrincipalConnection.CertificateThumbprint\n\n$AzureContext = Select-AzSubscription -SubscriptionId $ServicePrincipalConnection.SubscriptionID\n#endregion BoilerplateAuthentication\n\n#If you wish to use the run context, it must be converted from JSON\n$context = ConvertFrom-Json  $SoftwareUpdateConfigurationRunContext\n$runId",
+      "tokens": 0,
+      "firstFile": {
+        "name": "UpdateManagement-TurnOffVMs.ps1",
+        "start": 26,
+        "end": 45,
+        "startLoc": {
+          "line": 26,
+          "column": 1,
+          "position": 9
+        },
+        "endLoc": {
+          "line": 45,
+          "column": 7,
+          "position": 106
+        }
+      },
+      "secondFile": {
+        "name": "UpdateManagement-TurnOnVMs.ps1",
+        "start": 27,
+        "end": 48,
+        "startLoc": {
+          "line": 27,
+          "column": 1,
+          "position": 9
+        },
+        "endLoc": {
+          "line": 48,
+          "column": 7,
+          "position": 108
+        }
+      }
+    },
+    {
+      "format": "powershell",
+      "lines": 20,
+      "fragment": "}\n\n#https://github.com/azureautomation/runbooks/blob/master/Utility/ARM/Find-WhoAmI\n# In order to prevent asking for an Automation Account name and the resource group of that AA,\n# search through all the automation accounts in the subscription \n# to find the one with a job which matches our job ID\n$AutomationResource = Get-AzResource -ResourceType Microsoft.Automation/AutomationAccounts\n\nforeach ($Automation in $AutomationResource)\n{\n    $Job = Get-AzAutomationJob -ResourceGroupName $Automation.ResourceGroupName -AutomationAccountName $Automation.Name -Id $PSPrivateMetadata.JobId.Guid -ErrorAction SilentlyContinue\n    if (!([string]::IsNullOrEmpty($Job)))\n    {\n        $ResourceGroup = $Job.ResourceGroupName\n        $AutomationAccount = $Job.AutomationAccountName\n        break;\n    }\n}\n\n$vmIds",
+      "tokens": 0,
+      "firstFile": {
+        "name": "UpdateManagement-TurnOffVMs.ps1",
+        "start": 55,
+        "end": 74,
+        "startLoc": {
+          "line": 55,
+          "column": 1,
+          "position": 155
+        },
+        "endLoc": {
+          "line": 74,
+          "column": 7,
+          "position": 278
+        }
+      },
+      "secondFile": {
+        "name": "UpdateManagement-TurnOnVMs.ps1",
+        "start": 63,
+        "end": 82,
+        "startLoc": {
+          "line": 63,
+          "column": 1,
+          "position": 193
+        },
+        "endLoc": {
+          "line": 82,
+          "column": 40,
+          "position": 316
+        }
+      }
+    },
+    {
+      "format": "powershell",
+      "lines": 15,
+      "fragment": "#Azure VMs are expressed by:\n# subscription/$subscriptionID/resourcegroups/$resourceGroup/providers/microsoft.compute/virtualmachines/$name\n$vmIds | ForEach-Object {\n    $vmId =  $_\n    \n    $split = $vmId -split \"/\";\n    $subscriptionId = $split[2]; \n    $rg = $split[4];\n    $name = $split[8];\n    Write-Output (\"Subscription Id: \" + $subscriptionId)\n    $mute = Select-AzSubscription -Subscription $subscriptionId\n\n    $vm = Get-AzVM -ResourceGroupName $rg -Name $name -Status -DefaultProfile $mute\n\n    $state",
+      "tokens": 0,
+      "firstFile": {
+        "name": "UpdateManagement-TurnOffVMs.ps1",
+        "start": 79,
+        "end": 93,
+        "startLoc": {
+          "line": 79,
+          "column": 1,
+          "position": 315
+        },
+        "endLoc": {
+          "line": 93,
+          "column": 7,
+          "position": 438
+        }
+      },
+      "secondFile": {
+        "name": "UpdateManagement-TurnOnVMs.ps1",
+        "start": 90,
+        "end": 104,
+        "startLoc": {
+          "line": 90,
+          "column": 1,
+          "position": 389
+        },
+        "endLoc": {
+          "line": 104,
+          "column": 85,
+          "position": 513
+        }
+      }
+    }
+  ],
+  "filename": "/node-deps/node_modules/@jscpd/html-reporter/dist/templates/main.pug"
+}

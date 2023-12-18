@@ -1,0 +1,6 @@
+Results of terraform-fmt linter (version 1.5.4)
+See documentation on https://megalinter.io/7.3.0/descriptors/terraform_terraform_fmt/
+-----------------------------------------------
+
+✅ [SUCCESS] terraform/insecure/appservice/main.tf
+✅ [SUCCESS] terraform/optional-testing/modules/storage/main.tf

@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "AquaSecurityOfficial.trivy-vulnerability-scanner",
+        "MS-CST-E.vscode-devskim",
+        "streetsidesoftware.code-spell-checker",
+        "Sam-Cogan.ARMTTKExtension",
+        "Bridgecrew.checkov",
+        "HashiCorp.terraform",
+        "esbenp.prettier-vscode"
+    ]
+}

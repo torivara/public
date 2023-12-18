@@ -1,0 +1,1115 @@
+Results of trivy linter (version 0.44.0)
+See documentation on https://megalinter.io/7.3.0/descriptors/repository_trivy/
+-----------------------------------------------
+
+❌ [ERROR] for workspace /github/workspace
+Linter raw log:
+2023-08-25T13:23:58.214Z	INFO	Need to update DB
+2023-08-25T13:23:58.214Z	INFO	DB Repository: ghcr.io/aquasecurity/trivy-db
+2023-08-25T13:23:58.214Z	INFO	Downloading DB...
+11.44 MiB / 39.56 MiB [----------------->___________________________________________] 28.93% ? p/s ?27.82 MiB / 39.56 MiB [------------------------------------------>__________________] 70.32% ? p/s ?39.56 MiB / 39.56 MiB [----------------------------------------------------------->] 100.00% ? p/s ?39.56 MiB / 39.56 MiB [---------------------------------------------->] 100.00% 47.03 MiB p/s ETA 0s39.56 MiB / 39.56 MiB [---------------------------------------------->] 100.00% 47.03 MiB p/s ETA 0s39.56 MiB / 39.56 MiB [---------------------------------------------->] 100.00% 47.03 MiB p/s ETA 0s39.56 MiB / 39.56 MiB [---------------------------------------------->] 100.00% 44.00 MiB p/s ETA 0s39.56 MiB / 39.56 MiB [---------------------------------------------->] 100.00% 44.00 MiB p/s ETA 0s39.56 MiB / 39.56 MiB [---------------------------------------------->] 100.00% 44.00 MiB p/s ETA 0s39.56 MiB / 39.56 MiB [---------------------------------------------->] 100.00% 41.16 MiB p/s ETA 0s39.56 MiB / 39.56 MiB [-------------------------------------------------] 100.00% 21.01 MiB p/s 2.1s2023-08-25T13:24:00.837Z	INFO	Vulnerability scanning is enabled
+2023-08-25T13:24:00.837Z	INFO	Misconfiguration scanning is enabled
+2023-08-25T13:24:00.837Z	INFO	Need to update the built-in policies
+2023-08-25T13:24:00.837Z	INFO	Downloading the built-in policies...
+42.46 KiB / 42.46 KiB [-----------------------------------------------------------] 100.00% ? p/s 0s2023-08-25T13:24:06.976Z	INFO	Number of language-specific files: 0
+2023-08-25T13:24:06.976Z	INFO	Detected config files: 46
+
+template.json (azure-arm)
+=========================
+Tests: 6 (SUCCESSES: 2, FAILURES: 4, EXCEPTIONS: 0)
+Failures: 4 (UNKNOWN: 0, LOW: 2, MEDIUM: 1, HIGH: 1, CRITICAL: 0)
+
+LOW: App service does not have client certificates enabled.
+════════════════════════════════════════
+The TLS mutual authentication technique in enterprise environments ensures the authenticity of clients to the server. If incoming client certificates are enabled only an authenticated client with valid certificates can access the app.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0001
+────────────────────────────────────────
+ template.json:122-141
+────────────────────────────────────────
+   1   {
+   .   
+ 122 ┌             "properties": {
+ 123 │                 "name": "[variables('webAppName')]",
+ 124 │                 "siteConfig": {
+ 125 │                     "appSettings": "[union(parameters('customAppSettings'),createArray(json(concat('{\"name\": \"APPINSIGHTS_INSTRUMENTATIONKEY\", \"value\": \"',reference(resourceId('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey,'\"}')),json(concat('{\"name\": \"APPLICATIONINSIGHTS_CONNECTION_STRING\", \"value\": \"',reference(resourceId('microsoft.insights/components/', variables('appInsightsName'))).ConnectionString,'\"}')),json(concat('{\"name\": \"ApplicationInsightsAgent_EXTENSION_VERSION\", \"value\": \"~2\"}')),json(concat('{\"name\": \"XDT_MicrosoftApplicationInsights_Mode\", \"value\": \"recommended\"}')),json(concat('{\"name\": \"InstrumentationEngine_EXTENSION_VERSION\", \"value\": \"~1\"}')),json(concat('{\"name\": \"XDT_MicrosoftApplicationInsights_BaseExtensions\", \"value\": \"~1\"}'))))]",
+ 126 │                     "metadata": [
+ 127 │                         {
+ 128 └                             "name": "CURRENT_STACK",
+ ...   
+────────────────────────────────────────
+
+
+LOW: App service does not have an identity type.
+════════════════════════════════════════
+Registering the identity used by an App with AD allows it to interact with other services without using username and password
+
+See https://avd.aquasec.com/misconfig/avd-azu-0002
+────────────────────────────────────────
+ template.json:122-141
+────────────────────────────────────────
+   1   {
+   .   
+ 122 ┌             "properties": {
+ 123 │                 "name": "[variables('webAppName')]",
+ 124 │                 "siteConfig": {
+ 125 │                     "appSettings": "[union(parameters('customAppSettings'),createArray(json(concat('{\"name\": \"APPINSIGHTS_INSTRUMENTATIONKEY\", \"value\": \"',reference(resourceId('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey,'\"}')),json(concat('{\"name\": \"APPLICATIONINSIGHTS_CONNECTION_STRING\", \"value\": \"',reference(resourceId('microsoft.insights/components/', variables('appInsightsName'))).ConnectionString,'\"}')),json(concat('{\"name\": \"ApplicationInsightsAgent_EXTENSION_VERSION\", \"value\": \"~2\"}')),json(concat('{\"name\": \"XDT_MicrosoftApplicationInsights_Mode\", \"value\": \"recommended\"}')),json(concat('{\"name\": \"InstrumentationEngine_EXTENSION_VERSION\", \"value\": \"~1\"}')),json(concat('{\"name\": \"XDT_MicrosoftApplicationInsights_BaseExtensions\", \"value\": \"~1\"}'))))]",
+ 126 │                     "metadata": [
+ 127 │                         {
+ 128 └                             "name": "CURRENT_STACK",
+ ...   
+────────────────────────────────────────
+
+
+MEDIUM: App service does not have authentication enabled.
+════════════════════════════════════════
+Enabling authentication ensures that all communications in the application are authenticated. The auth_settings block needs to be filled out with the appropriate auth backend settings
+
+See https://avd.aquasec.com/misconfig/avd-azu-0003
+────────────────────────────────────────
+ template.json:122-141
+────────────────────────────────────────
+   1   {
+   .   
+ 122 ┌             "properties": {
+ 123 │                 "name": "[variables('webAppName')]",
+ 124 │                 "siteConfig": {
+ 125 │                     "appSettings": "[union(parameters('customAppSettings'),createArray(json(concat('{\"name\": \"APPINSIGHTS_INSTRUMENTATIONKEY\", \"value\": \"',reference(resourceId('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey,'\"}')),json(concat('{\"name\": \"APPLICATIONINSIGHTS_CONNECTION_STRING\", \"value\": \"',reference(resourceId('microsoft.insights/components/', variables('appInsightsName'))).ConnectionString,'\"}')),json(concat('{\"name\": \"ApplicationInsightsAgent_EXTENSION_VERSION\", \"value\": \"~2\"}')),json(concat('{\"name\": \"XDT_MicrosoftApplicationInsights_Mode\", \"value\": \"recommended\"}')),json(concat('{\"name\": \"InstrumentationEngine_EXTENSION_VERSION\", \"value\": \"~1\"}')),json(concat('{\"name\": \"XDT_MicrosoftApplicationInsights_BaseExtensions\", \"value\": \"~1\"}'))))]",
+ 126 │                     "metadata": [
+ 127 │                         {
+ 128 └                             "name": "CURRENT_STACK",
+ ...   
+────────────────────────────────────────
+
+
+HIGH: App service does not require a secure TLS version.
+════════════════════════════════════════
+Use a more recent TLS/SSL policy for the App Service
+
+See https://avd.aquasec.com/misconfig/avd-azu-0006
+────────────────────────────────────────
+ template.json:122-141
+────────────────────────────────────────
+   1   {
+   .   
+ 122 ┌             "properties": {
+ 123 │                 "name": "[variables('webAppName')]",
+ 124 │                 "siteConfig": {
+ 125 │                     "appSettings": "[union(parameters('customAppSettings'),createArray(json(concat('{\"name\": \"APPINSIGHTS_INSTRUMENTATIONKEY\", \"value\": \"',reference(resourceId('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey,'\"}')),json(concat('{\"name\": \"APPLICATIONINSIGHTS_CONNECTION_STRING\", \"value\": \"',reference(resourceId('microsoft.insights/components/', variables('appInsightsName'))).ConnectionString,'\"}')),json(concat('{\"name\": \"ApplicationInsightsAgent_EXTENSION_VERSION\", \"value\": \"~2\"}')),json(concat('{\"name\": \"XDT_MicrosoftApplicationInsights_Mode\", \"value\": \"recommended\"}')),json(concat('{\"name\": \"InstrumentationEngine_EXTENSION_VERSION\", \"value\": \"~1\"}')),json(concat('{\"name\": \"XDT_MicrosoftApplicationInsights_BaseExtensions\", \"value\": \"~1\"}'))))]",
+ 126 │                     "metadata": [
+ 127 │                         {
+ 128 └                             "name": "CURRENT_STACK",
+ ...   
+────────────────────────────────────────
+
+
+
+terraform/agic/aks.tf (terraform)
+=================================
+Tests: 3 (SUCCESSES: 1, FAILURES: 2, EXCEPTIONS: 0)
+Failures: 2 (UNKNOWN: 0, LOW: 0, MEDIUM: 1, HIGH: 1, CRITICAL: 0)
+
+MEDIUM: Cluster does not have logging enabled via OMS Agent.
+════════════════════════════════════════
+Ensure AKS logging to Azure Monitoring is configured for containers to monitor the performance of workloads.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0040
+────────────────────────────────────────
+ terraform/agic/aks.tf:1-46
+────────────────────────────────────────
+   1 ┌ resource "azurerm_kubernetes_cluster" "k8s" {
+   2 │   name                    = var.aks_name
+   3 │   location                = azurerm_resource_group.rg.location
+   4 │   dns_prefix              = var.aks_dns_prefix
+   5 │   private_cluster_enabled = true
+   6 │ 
+   7 │   resource_group_name = azurerm_resource_group.rg.name
+   8 │ 
+   9 └   http_application_routing_enabled = false
+  ..   
+────────────────────────────────────────
+
+
+HIGH: Kubernetes cluster does not have a network policy set.
+════════════════════════════════════════
+The Kubernetes object type NetworkPolicy should be defined to have opportunity allow or block traffic to pods, as in a Kubernetes cluster configured with default settings, all pods can discover and communicate with each other without any restrictions.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0043
+────────────────────────────────────────
+ terraform/agic/aks.tf:23-29
+────────────────────────────────────────
+   1   resource "azurerm_kubernetes_cluster" "k8s" {
+   .   
+  23 ┌   network_profile {
+  24 │     network_plugin     = "azure"
+  25 │     dns_service_ip     = var.aks_dns_service_ip
+  26 │     docker_bridge_cidr = var.aks_docker_bridge_cidr
+  27 │     service_cidr       = var.aks_service_cidr
+  28 │     load_balancer_sku  = "standard"
+  29 └   }
+  ..   
+────────────────────────────────────────
+
+
+
+terraform/agic/deployment.yaml (kubernetes)
+===========================================
+Tests: 168 (SUCCESSES: 145, FAILURES: 23, EXCEPTIONS: 0)
+Failures: 23 (UNKNOWN: 0, LOW: 17, MEDIUM: 6, HIGH: 0, CRITICAL: 0)
+
+MEDIUM: Container 'azure-vote-back' of Deployment 'azure-vote-back' should set 'securityContext.allowPrivilegeEscalation' to false
+════════════════════════════════════════
+A program inside the container can elevate its own privileges and run as root, which might give the program control over the container and node.
+
+See https://avd.aquasec.com/misconfig/ksv001
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:18-32
+────────────────────────────────────────
+  18 ┌       - name: azure-vote-back
+  19 │         image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+  20 │         env:
+  21 │         - name: ALLOW_EMPTY_PASSWORD
+  22 │           value: "yes"
+  23 │         resources:
+  24 │           requests:
+  25 │             cpu: 100m
+  26 └             memory: 128Mi
+  ..   
+────────────────────────────────────────
+
+
+MEDIUM: Container 'azure-vote-front' of Deployment 'azure-vote-front' should set 'securityContext.allowPrivilegeEscalation' to false
+════════════════════════════════════════
+A program inside the container can elevate its own privileges and run as root, which might give the program control over the container and node.
+
+See https://avd.aquasec.com/misconfig/ksv001
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:61-74
+────────────────────────────────────────
+  61 ┌       - name: azure-vote-front
+  62 │         image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
+  63 │         resources:
+  64 │           requests:
+  65 │             cpu: 100m
+  66 │             memory: 128Mi
+  67 │           limits:
+  68 │             cpu: 250m
+  69 └             memory: 256Mi
+  ..   
+────────────────────────────────────────
+
+
+LOW: Container 'azure-vote-back' of Deployment 'azure-vote-back' should add 'ALL' to 'securityContext.capabilities.drop'
+════════════════════════════════════════
+The container should drop all default capabilities and add only those that are needed for its execution.
+
+See https://avd.aquasec.com/misconfig/ksv003
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:18-32
+────────────────────────────────────────
+  18 ┌       - name: azure-vote-back
+  19 │         image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+  20 │         env:
+  21 │         - name: ALLOW_EMPTY_PASSWORD
+  22 │           value: "yes"
+  23 │         resources:
+  24 │           requests:
+  25 │             cpu: 100m
+  26 └             memory: 128Mi
+  ..   
+────────────────────────────────────────
+
+
+LOW: Container 'azure-vote-front' of Deployment 'azure-vote-front' should add 'ALL' to 'securityContext.capabilities.drop'
+════════════════════════════════════════
+The container should drop all default capabilities and add only those that are needed for its execution.
+
+See https://avd.aquasec.com/misconfig/ksv003
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:61-74
+────────────────────────────────────────
+  61 ┌       - name: azure-vote-front
+  62 │         image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
+  63 │         resources:
+  64 │           requests:
+  65 │             cpu: 100m
+  66 │             memory: 128Mi
+  67 │           limits:
+  68 │             cpu: 250m
+  69 └             memory: 256Mi
+  ..   
+────────────────────────────────────────
+
+
+MEDIUM: Container 'azure-vote-back' of Deployment 'azure-vote-back' should set 'securityContext.runAsNonRoot' to true
+════════════════════════════════════════
+'runAsNonRoot' forces the running image to run as a non-root user to ensure least privileges.
+
+See https://avd.aquasec.com/misconfig/ksv012
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:18-32
+────────────────────────────────────────
+  18 ┌       - name: azure-vote-back
+  19 │         image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+  20 │         env:
+  21 │         - name: ALLOW_EMPTY_PASSWORD
+  22 │           value: "yes"
+  23 │         resources:
+  24 │           requests:
+  25 │             cpu: 100m
+  26 └             memory: 128Mi
+  ..   
+────────────────────────────────────────
+
+
+MEDIUM: Container 'azure-vote-front' of Deployment 'azure-vote-front' should set 'securityContext.runAsNonRoot' to true
+════════════════════════════════════════
+'runAsNonRoot' forces the running image to run as a non-root user to ensure least privileges.
+
+See https://avd.aquasec.com/misconfig/ksv012
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:61-74
+────────────────────────────────────────
+  61 ┌       - name: azure-vote-front
+  62 │         image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
+  63 │         resources:
+  64 │           requests:
+  65 │             cpu: 100m
+  66 │             memory: 128Mi
+  67 │           limits:
+  68 │             cpu: 250m
+  69 └             memory: 256Mi
+  ..   
+────────────────────────────────────────
+
+
+LOW: Container 'azure-vote-back' of Deployment 'azure-vote-back' should set 'securityContext.readOnlyRootFilesystem' to true
+════════════════════════════════════════
+An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+
+See https://avd.aquasec.com/misconfig/ksv014
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:18-32
+────────────────────────────────────────
+  18 ┌       - name: azure-vote-back
+  19 │         image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+  20 │         env:
+  21 │         - name: ALLOW_EMPTY_PASSWORD
+  22 │           value: "yes"
+  23 │         resources:
+  24 │           requests:
+  25 │             cpu: 100m
+  26 └             memory: 128Mi
+  ..   
+────────────────────────────────────────
+
+
+LOW: Container 'azure-vote-front' of Deployment 'azure-vote-front' should set 'securityContext.readOnlyRootFilesystem' to true
+════════════════════════════════════════
+An immutable root file system prevents applications from writing to their local disk. This can limit intrusions, as attackers will not be able to tamper with the file system or write foreign executables to disk.
+
+See https://avd.aquasec.com/misconfig/ksv014
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:61-74
+────────────────────────────────────────
+  61 ┌       - name: azure-vote-front
+  62 │         image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
+  63 │         resources:
+  64 │           requests:
+  65 │             cpu: 100m
+  66 │             memory: 128Mi
+  67 │           limits:
+  68 │             cpu: 250m
+  69 └             memory: 256Mi
+  ..   
+────────────────────────────────────────
+
+
+LOW: Container 'azure-vote-back' of Deployment 'azure-vote-back' should set 'securityContext.runAsUser' > 10000
+════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv020
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:18-32
+────────────────────────────────────────
+  18 ┌       - name: azure-vote-back
+  19 │         image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+  20 │         env:
+  21 │         - name: ALLOW_EMPTY_PASSWORD
+  22 │           value: "yes"
+  23 │         resources:
+  24 │           requests:
+  25 │             cpu: 100m
+  26 └             memory: 128Mi
+  ..   
+────────────────────────────────────────
+
+
+LOW: Container 'azure-vote-front' of Deployment 'azure-vote-front' should set 'securityContext.runAsUser' > 10000
+════════════════════════════════════════
+Force the container to run with user ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv020
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:61-74
+────────────────────────────────────────
+  61 ┌       - name: azure-vote-front
+  62 │         image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
+  63 │         resources:
+  64 │           requests:
+  65 │             cpu: 100m
+  66 │             memory: 128Mi
+  67 │           limits:
+  68 │             cpu: 250m
+  69 └             memory: 256Mi
+  ..   
+────────────────────────────────────────
+
+
+LOW: Container 'azure-vote-back' of Deployment 'azure-vote-back' should set 'securityContext.runAsGroup' > 10000
+════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv021
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:18-32
+────────────────────────────────────────
+  18 ┌       - name: azure-vote-back
+  19 │         image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+  20 │         env:
+  21 │         - name: ALLOW_EMPTY_PASSWORD
+  22 │           value: "yes"
+  23 │         resources:
+  24 │           requests:
+  25 │             cpu: 100m
+  26 └             memory: 128Mi
+  ..   
+────────────────────────────────────────
+
+
+LOW: Container 'azure-vote-front' of Deployment 'azure-vote-front' should set 'securityContext.runAsGroup' > 10000
+════════════════════════════════════════
+Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+
+See https://avd.aquasec.com/misconfig/ksv021
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:61-74
+────────────────────────────────────────
+  61 ┌       - name: azure-vote-front
+  62 │         image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
+  63 │         resources:
+  64 │           requests:
+  65 │             cpu: 100m
+  66 │             memory: 128Mi
+  67 │           limits:
+  68 │             cpu: 250m
+  69 └             memory: 256Mi
+  ..   
+────────────────────────────────────────
+
+
+LOW: Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+════════════════════════════════════════
+The RuntimeDefault/Localhost seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv030
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:61-74
+────────────────────────────────────────
+  61 ┌       - name: azure-vote-front
+  62 │         image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
+  63 │         resources:
+  64 │           requests:
+  65 │             cpu: 100m
+  66 │             memory: 128Mi
+  67 │           limits:
+  68 │             cpu: 250m
+  69 └             memory: 256Mi
+  ..   
+────────────────────────────────────────
+
+
+LOW: Either Pod or Container should set 'securityContext.seccompProfile.type' to 'RuntimeDefault'
+════════════════════════════════════════
+The RuntimeDefault/Localhost seccomp profile must be required, or allow specific additional profiles.
+
+See https://avd.aquasec.com/misconfig/ksv030
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:18-32
+────────────────────────────────────────
+  18 ┌       - name: azure-vote-back
+  19 │         image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+  20 │         env:
+  21 │         - name: ALLOW_EMPTY_PASSWORD
+  22 │           value: "yes"
+  23 │         resources:
+  24 │           requests:
+  25 │             cpu: 100m
+  26 └             memory: 128Mi
+  ..   
+────────────────────────────────────────
+
+
+MEDIUM: container azure-vote-back of deployment azure-vote-back in default namespace should specify a seccomp profile
+════════════════════════════════════════
+Seccomp profile must not be explicitly set to 'Unconfined'.
+
+See https://avd.aquasec.com/misconfig/ksv104
+────────────────────────────────────────
+
+
+MEDIUM: container azure-vote-front of deployment azure-vote-front in default namespace should specify a seccomp profile
+════════════════════════════════════════
+Seccomp profile must not be explicitly set to 'Unconfined'.
+
+See https://avd.aquasec.com/misconfig/ksv104
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:43
+────────────────────────────────────────
+  43 [ ---
+────────────────────────────────────────
+
+
+LOW: container should drop all
+════════════════════════════════════════
+Containers must drop ALL capabilities, and are only permitted to add back the NET_BIND_SERVICE capability.
+
+See https://avd.aquasec.com/misconfig/ksv106
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:18-32
+────────────────────────────────────────
+  18 ┌       - name: azure-vote-back
+  19 │         image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+  20 │         env:
+  21 │         - name: ALLOW_EMPTY_PASSWORD
+  22 │           value: "yes"
+  23 │         resources:
+  24 │           requests:
+  25 │             cpu: 100m
+  26 └             memory: 128Mi
+  ..   
+────────────────────────────────────────
+
+
+LOW: container should drop all
+════════════════════════════════════════
+Containers must drop ALL capabilities, and are only permitted to add back the NET_BIND_SERVICE capability.
+
+See https://avd.aquasec.com/misconfig/ksv106
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:61-74
+────────────────────────────────────────
+  61 ┌       - name: azure-vote-front
+  62 │         image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
+  63 │         resources:
+  64 │           requests:
+  65 │             cpu: 100m
+  66 │             memory: 128Mi
+  67 │           limits:
+  68 │             cpu: 250m
+  69 └             memory: 256Mi
+  ..   
+────────────────────────────────────────
+
+
+LOW: deployment azure-vote-back in default namespace should set spec.securityContext.runAsGroup, spec.securityContext.supplementalGroups[*] and spec.securityContext.fsGroup to integer greater than 0
+════════════════════════════════════════
+According to pod security standard 'Non-root groups', containers should be forbidden from running with a root primary or supplementary GID.
+
+See https://avd.aquasec.com/misconfig/ksv116
+────────────────────────────────────────
+
+
+LOW: deployment azure-vote-front in default namespace should set spec.securityContext.runAsGroup, spec.securityContext.supplementalGroups[*] and spec.securityContext.fsGroup to integer greater than 0
+════════════════════════════════════════
+According to pod security standard 'Non-root groups', containers should be forbidden from running with a root primary or supplementary GID.
+
+See https://avd.aquasec.com/misconfig/ksv116
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:43
+────────────────────────────────────────
+  43 [ ---
+────────────────────────────────────────
+
+
+LOW: ingress azure-vote-front in default namespace should set spec.securityContext.runAsGroup, spec.securityContext.supplementalGroups[*] and spec.securityContext.fsGroup to integer greater than 0
+════════════════════════════════════════
+According to pod security standard 'Non-root groups', containers should be forbidden from running with a root primary or supplementary GID.
+
+See https://avd.aquasec.com/misconfig/ksv116
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:86
+────────────────────────────────────────
+  86 [ ---
+────────────────────────────────────────
+
+
+LOW: service azure-vote-back in default namespace should set spec.securityContext.runAsGroup, spec.securityContext.supplementalGroups[*] and spec.securityContext.fsGroup to integer greater than 0
+════════════════════════════════════════
+According to pod security standard 'Non-root groups', containers should be forbidden from running with a root primary or supplementary GID.
+
+See https://avd.aquasec.com/misconfig/ksv116
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:33
+────────────────────────────────────────
+  33 [ ---
+────────────────────────────────────────
+
+
+LOW: service azure-vote-front in default namespace should set spec.securityContext.runAsGroup, spec.securityContext.supplementalGroups[*] and spec.securityContext.fsGroup to integer greater than 0
+════════════════════════════════════════
+According to pod security standard 'Non-root groups', containers should be forbidden from running with a root primary or supplementary GID.
+
+See https://avd.aquasec.com/misconfig/ksv116
+────────────────────────────────────────
+ terraform/agic/deployment.yaml:75
+────────────────────────────────────────
+  75 [ ---
+────────────────────────────────────────
+
+
+
+terraform/agic/jumpbox.tf (terraform)
+=====================================
+Tests: 6 (SUCCESSES: 5, FAILURES: 1, EXCEPTIONS: 0)
+Failures: 1 (UNKNOWN: 0, LOW: 0, MEDIUM: 0, HIGH: 1, CRITICAL: 0)
+
+HIGH: Linux virtual machine allows password authentication.
+════════════════════════════════════════
+Access to virtual machines should be authenticated using SSH keys. Removing the option of password authentication enforces more secure methods while removing the risks inherent with passwords.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0039
+────────────────────────────────────────
+ terraform/agic/jumpbox.tf:50
+────────────────────────────────────────
+  42   resource "azurerm_linux_virtual_machine" "jumpbox" {
+  ..   
+  50 [   disable_password_authentication = false
+  ..   
+  67   }
+────────────────────────────────────────
+
+
+
+terraform/functionapp/modules/app/key_vault.tf (terraform)
+==========================================================
+Tests: 6 (SUCCESSES: 3, FAILURES: 3, EXCEPTIONS: 0)
+Failures: 3 (UNKNOWN: 0, LOW: 0, MEDIUM: 3, HIGH: 0, CRITICAL: 0)
+
+MEDIUM: Vault does not have purge protection enabled.
+════════════════════════════════════════
+Purge protection is an optional Key Vault behavior and is not enabled by default.
+
+Purge protection can only be enabled once soft-delete is enabled. It can be turned on via CLI or PowerShell.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0016
+────────────────────────────────────────
+ terraform/functionapp/modules/app/key_vault.tf:1-17
+────────────────────────────────────────
+   1 ┌ resource "azurerm_key_vault" "kv" {
+   2 │   location                   = azurerm_resource_group.rg.location
+   3 │   name                       = "${local.resource_prefix}-kv"
+   4 │   resource_group_name        = azurerm_resource_group.rg.name
+   5 │   sku_name                   = "standard"
+   6 │   tenant_id                  = data.azurerm_client_config.current.tenant_id
+   7 │   enable_rbac_authorization  = true
+   8 │   soft_delete_retention_days = 90
+   9 └ 
+  ..   
+────────────────────────────────────────
+
+
+MEDIUM: Vault does not have purge protection enabled.
+════════════════════════════════════════
+Purge protection is an optional Key Vault behavior and is not enabled by default.
+
+Purge protection can only be enabled once soft-delete is enabled. It can be turned on via CLI or PowerShell.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0016
+────────────────────────────────────────
+ terraform/functionapp/modules/app/key_vault.tf:1-17
+────────────────────────────────────────
+   1 ┌ resource "azurerm_key_vault" "kv" {
+   2 │   location                   = azurerm_resource_group.rg.location
+   3 │   name                       = "${local.resource_prefix}-kv"
+   4 │   resource_group_name        = azurerm_resource_group.rg.name
+   5 │   sku_name                   = "standard"
+   6 │   tenant_id                  = data.azurerm_client_config.current.tenant_id
+   7 │   enable_rbac_authorization  = true
+   8 │   soft_delete_retention_days = 90
+   9 └ 
+  ..   
+────────────────────────────────────────
+
+
+MEDIUM: Vault does not have purge protection enabled.
+════════════════════════════════════════
+Purge protection is an optional Key Vault behavior and is not enabled by default.
+
+Purge protection can only be enabled once soft-delete is enabled. It can be turned on via CLI or PowerShell.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0016
+────────────────────────────────────────
+ terraform/functionapp/modules/app/key_vault.tf:1-17
+────────────────────────────────────────
+   1 ┌ resource "azurerm_key_vault" "kv" {
+   2 │   location                   = azurerm_resource_group.rg.location
+   3 │   name                       = "${local.resource_prefix}-kv"
+   4 │   resource_group_name        = azurerm_resource_group.rg.name
+   5 │   sku_name                   = "standard"
+   6 │   tenant_id                  = data.azurerm_client_config.current.tenant_id
+   7 │   enable_rbac_authorization  = true
+   8 │   soft_delete_retention_days = 90
+   9 └ 
+  ..   
+────────────────────────────────────────
+
+
+
+terraform/functionapp/modules/app/storage.tf (terraform)
+========================================================
+Tests: 12 (SUCCESSES: 9, FAILURES: 3, EXCEPTIONS: 0)
+Failures: 3 (UNKNOWN: 0, LOW: 0, MEDIUM: 0, HIGH: 0, CRITICAL: 3)
+
+CRITICAL: Network rules allow access by default.
+════════════════════════════════════════
+The default_action for network rules should come into effect when no other rules are matched.
+
+The default action should be set to Deny.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0012
+────────────────────────────────────────
+ terraform/functionapp/modules/app/storage.tf:16
+────────────────────────────────────────
+   5   resource "azurerm_storage_account" "sa" {
+   .   
+  16 [     default_action             = var.vnet_integration_enabled == false ? "Allow" : "Deny"
+  ..   
+  20   }
+────────────────────────────────────────
+
+
+CRITICAL: Network rules allow access by default.
+════════════════════════════════════════
+The default_action for network rules should come into effect when no other rules are matched.
+
+The default action should be set to Deny.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0012
+────────────────────────────────────────
+ terraform/functionapp/modules/app/storage.tf:16
+────────────────────────────────────────
+   5   resource "azurerm_storage_account" "sa" {
+   .   
+  16 [     default_action             = var.vnet_integration_enabled == false ? "Allow" : "Deny"
+  ..   
+  20   }
+────────────────────────────────────────
+
+
+CRITICAL: Network rules allow access by default.
+════════════════════════════════════════
+The default_action for network rules should come into effect when no other rules are matched.
+
+The default action should be set to Deny.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0012
+────────────────────────────────────────
+ terraform/functionapp/modules/app/storage.tf:16
+────────────────────────────────────────
+   5   resource "azurerm_storage_account" "sa" {
+   .   
+  16 [     default_action             = var.vnet_integration_enabled == false ? "Allow" : "Deny"
+  ..   
+  20   }
+────────────────────────────────────────
+
+
+
+terraform/insecure/appservice/main.tf (terraform)
+=================================================
+Tests: 5 (SUCCESSES: 1, FAILURES: 4, EXCEPTIONS: 0)
+Failures: 4 (UNKNOWN: 0, LOW: 3, MEDIUM: 1, HIGH: 0, CRITICAL: 0)
+
+LOW: App service does not have client certificates enabled.
+════════════════════════════════════════
+The TLS mutual authentication technique in enterprise environments ensures the authenticity of clients to the server. If incoming client certificates are enabled only an authenticated client with valid certificates can access the app.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0001
+────────────────────────────────────────
+ terraform/insecure/appservice/main.tf:20-28
+────────────────────────────────────────
+  20 ┌ resource "azurerm_app_service" "app" {
+  21 │   location            = azurerm_resource_group.rg.location
+  22 │   name                = "tf-insecure-app01-as"
+  23 │   resource_group_name = azurerm_resource_group.rg.name
+  24 │   service_plan_id     = azurerm_service_plan.plan.id
+  25 │   site_config {
+  26 │   }
+  27 │ 
+  28 └ }
+────────────────────────────────────────
+
+
+LOW: App service does not have an identity type.
+════════════════════════════════════════
+Registering the identity used by an App with AD allows it to interact with other services without using username and password
+
+See https://avd.aquasec.com/misconfig/avd-azu-0002
+────────────────────────────────────────
+ terraform/insecure/appservice/main.tf:20-28
+────────────────────────────────────────
+  20 ┌ resource "azurerm_app_service" "app" {
+  21 │   location            = azurerm_resource_group.rg.location
+  22 │   name                = "tf-insecure-app01-as"
+  23 │   resource_group_name = azurerm_resource_group.rg.name
+  24 │   service_plan_id     = azurerm_service_plan.plan.id
+  25 │   site_config {
+  26 │   }
+  27 │ 
+  28 └ }
+────────────────────────────────────────
+
+
+MEDIUM: App service does not have authentication enabled.
+════════════════════════════════════════
+Enabling authentication ensures that all communications in the application are authenticated. The auth_settings block needs to be filled out with the appropriate auth backend settings
+
+See https://avd.aquasec.com/misconfig/avd-azu-0003
+────────────────────────────────────────
+ terraform/insecure/appservice/main.tf:20-28
+────────────────────────────────────────
+  20 ┌ resource "azurerm_app_service" "app" {
+  21 │   location            = azurerm_resource_group.rg.location
+  22 │   name                = "tf-insecure-app01-as"
+  23 │   resource_group_name = azurerm_resource_group.rg.name
+  24 │   service_plan_id     = azurerm_service_plan.plan.id
+  25 │   site_config {
+  26 │   }
+  27 │ 
+  28 └ }
+────────────────────────────────────────
+
+
+LOW: App service does not have HTTP/2 enabled.
+════════════════════════════════════════
+Use the latest version of HTTP to ensure you are benefiting from security fixes
+
+See https://avd.aquasec.com/misconfig/avd-azu-0005
+────────────────────────────────────────
+ terraform/insecure/appservice/main.tf:25-26
+────────────────────────────────────────
+  20   resource "azurerm_app_service" "app" {
+  21     location            = azurerm_resource_group.rg.location
+  22     name                = "tf-insecure-app01-as"
+  23     resource_group_name = azurerm_resource_group.rg.name
+  24     service_plan_id     = azurerm_service_plan.plan.id
+  25 ┌   site_config {
+  26 └   }
+  27   
+  28   }
+────────────────────────────────────────
+
+
+
+terraform/insecure/keyvault/main.tf (terraform)
+===============================================
+Tests: 4 (SUCCESSES: 0, FAILURES: 3, EXCEPTIONS: 1)
+Failures: 3 (UNKNOWN: 0, LOW: 2, MEDIUM: 1, HIGH: 0, CRITICAL: 0)
+
+LOW: Secret does not have a content-type specified.
+════════════════════════════════════════
+Content Type is an optional Key Vault Secret behavior and is not enabled by default.
+
+Clients may specify the content type of a secret to assist in interpreting the secret data when it's retrieved. The maximum length of this field is 255 characters. There are no pre-defined values. The suggested usage is as a hint for interpreting the secret data.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0015
+────────────────────────────────────────
+ terraform/insecure/keyvault/main.tf:48-52
+────────────────────────────────────────
+  48 ┌ resource "azurerm_key_vault_secret" "bad_example" {
+  49 │   name         = "secret-sauce"
+  50 │   value        = "szechuan"
+  51 │   key_vault_id = azurerm_key_vault.example.id
+  52 └ }
+────────────────────────────────────────
+
+
+MEDIUM: Vault does not have purge protection enabled.
+════════════════════════════════════════
+Purge protection is an optional Key Vault behavior and is not enabled by default.
+
+Purge protection can only be enabled once soft-delete is enabled. It can be turned on via CLI or PowerShell.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0016
+────────────────────────────────────────
+ terraform/insecure/keyvault/main.tf:26
+────────────────────────────────────────
+  19   resource "azurerm_key_vault" "example" {
+  ..   
+  26 [   purge_protection_enabled    = false
+  ..   
+  46   }
+────────────────────────────────────────
+
+
+LOW: Secret should have an expiry date specified.
+════════════════════════════════════════
+Expiration Date is an optional Key Vault Secret behavior and is not set by default.
+
+Set when the resource will be become inactive.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0017
+────────────────────────────────────────
+ terraform/insecure/keyvault/main.tf:48-52
+────────────────────────────────────────
+  48 ┌ resource "azurerm_key_vault_secret" "bad_example" {
+  49 │   name         = "secret-sauce"
+  50 │   value        = "szechuan"
+  51 │   key_vault_id = azurerm_key_vault.example.id
+  52 └ }
+────────────────────────────────────────
+
+
+
+terraform/insecure/role/main.tf (terraform)
+===========================================
+Tests: 1 (SUCCESSES: 0, FAILURES: 1, EXCEPTIONS: 0)
+Failures: 1 (UNKNOWN: 0, LOW: 0, MEDIUM: 1, HIGH: 0, CRITICAL: 0)
+
+MEDIUM: Role definition uses wildcard action with all scopes.
+════════════════════════════════════════
+The permissions granted to a role should be kept to the minimum required to be able to do the task. Wildcard permissions must not be used.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0030
+────────────────────────────────────────
+ terraform/insecure/role/main.tf:19
+────────────────────────────────────────
+  13   resource "azurerm_role_definition" "example" {
+  ..   
+  19 [     actions     = ["*"]
+  ..   
+  26   }
+────────────────────────────────────────
+
+
+
+terraform/insecure/vm/main.tf (terraform)
+=========================================
+Tests: 5 (SUCCESSES: 2, FAILURES: 3, EXCEPTIONS: 0)
+Failures: 3 (UNKNOWN: 0, LOW: 0, MEDIUM: 0, HIGH: 0, CRITICAL: 3)
+
+CRITICAL: Security group rule allows ingress from public internet.
+════════════════════════════════════════
+Network security rules should not use very broad subnets.
+
+Where possible, segments should be broken into smaller subnets.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0047
+────────────────────────────────────────
+ terraform/insecure/vm/main.tf:58
+────────────────────────────────────────
+  45   resource "azurerm_network_security_group" "nsg" {
+  ..   
+  58 [     source_address_prefix      = "*"
+  ..   
+  61   }
+────────────────────────────────────────
+
+
+CRITICAL: Security group rule allows ingress to RDP port from multiple public internet addresses.
+════════════════════════════════════════
+RDP access can be configured on either the network security group or in the network security group rule.
+
+RDP access should not be permitted from the internet (*, 0.0.0.0, /0, internet, any). Consider using the Azure Bastion Service.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0048
+────────────────────────────────────────
+ terraform/insecure/vm/main.tf:58
+────────────────────────────────────────
+  45   resource "azurerm_network_security_group" "nsg" {
+  ..   
+  58 [     source_address_prefix      = "*"
+  ..   
+  61   }
+────────────────────────────────────────
+
+
+CRITICAL: Security group rule allows ingress to SSH port from multiple public internet addresses.
+════════════════════════════════════════
+SSH access can be configured on either the network security group or in the network security group rule. 
+
+SSH access should not be permitted from the internet (*, 0.0.0.0, /0, internet, any)
+
+See https://avd.aquasec.com/misconfig/avd-azu-0050
+────────────────────────────────────────
+ terraform/insecure/vm/main.tf:58
+────────────────────────────────────────
+  45   resource "azurerm_network_security_group" "nsg" {
+  ..   
+  58 [     source_address_prefix      = "*"
+  ..   
+  61   }
+────────────────────────────────────────
+
+
+
+terraform/logicapp/main.tf (terraform)
+======================================
+Tests: 2 (SUCCESSES: 1, FAILURES: 1, EXCEPTIONS: 0)
+Failures: 1 (UNKNOWN: 0, LOW: 0, MEDIUM: 0, HIGH: 0, CRITICAL: 1)
+
+CRITICAL: Storage account uses an insecure TLS version.
+════════════════════════════════════════
+Azure Storage currently supports three versions of the TLS protocol: 1.0, 1.1, and 1.2. 
+
+Azure Storage uses TLS 1.2 on public HTTPS endpoints, but TLS 1.0 and TLS 1.1 are still supported for backward compatibility.
+
+This check will warn if the minimum TLS is not set to TLS1_2.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0011
+────────────────────────────────────────
+ terraform/logicapp/main.tf:45-51
+────────────────────────────────────────
+  45 ┌ resource "azurerm_storage_account" "logicapp_std_storage" {
+  46 │   name                     = "${var.context_prefix}${random_string.unique.result}${var.environment_name}sa"
+  47 │   resource_group_name      = azurerm_resource_group.rg.name
+  48 │   location                 = azurerm_resource_group.rg.location
+  49 │   account_tier             = "Standard"
+  50 │   account_replication_type = "LRS"
+  51 └ }
+────────────────────────────────────────
+
+
+
+terraform/optional-testing/modules/storage/main.tf (terraform)
+==============================================================
+Tests: 8 (SUCCESSES: 4, FAILURES: 4, EXCEPTIONS: 0)
+Failures: 4 (UNKNOWN: 0, LOW: 0, MEDIUM: 0, HIGH: 2, CRITICAL: 2)
+
+HIGH: Account does not enforce HTTPS.
+════════════════════════════════════════
+You can configure your storage account to accept requests from secure connections only by setting the Secure transfer required property for the storage account. 
+
+When you require secure transfer, any requests originating from an insecure connection are rejected. 
+
+Microsoft recommends that you always require secure transfer for all of your storage accounts.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0008
+────────────────────────────────────────
+ terraform/optional-testing/modules/storage/main.tf:56
+────────────────────────────────────────
+  48   resource "azurerm_storage_account" "storeacc" {
+  ..   
+  56 [   enable_https_traffic_only       = each.value.enable_https_traffic_only != null ? each.value.enable_https_traffic_only : local.default_enable_https_traffic_only
+  ..   
+  59   }
+────────────────────────────────────────
+
+
+HIGH: Account does not enforce HTTPS.
+════════════════════════════════════════
+You can configure your storage account to accept requests from secure connections only by setting the Secure transfer required property for the storage account. 
+
+When you require secure transfer, any requests originating from an insecure connection are rejected. 
+
+Microsoft recommends that you always require secure transfer for all of your storage accounts.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0008
+────────────────────────────────────────
+ terraform/optional-testing/modules/storage/main.tf:56
+────────────────────────────────────────
+  48   resource "azurerm_storage_account" "storeacc" {
+  ..   
+  56 [   enable_https_traffic_only       = each.value.enable_https_traffic_only != null ? each.value.enable_https_traffic_only : local.default_enable_https_traffic_only
+  ..   
+  59   }
+────────────────────────────────────────
+
+
+CRITICAL: Storage account uses an insecure TLS version.
+════════════════════════════════════════
+Azure Storage currently supports three versions of the TLS protocol: 1.0, 1.1, and 1.2. 
+
+Azure Storage uses TLS 1.2 on public HTTPS endpoints, but TLS 1.0 and TLS 1.1 are still supported for backward compatibility.
+
+This check will warn if the minimum TLS is not set to TLS1_2.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0011
+────────────────────────────────────────
+ terraform/optional-testing/modules/storage/main.tf:58
+────────────────────────────────────────
+  48   resource "azurerm_storage_account" "storeacc" {
+  ..   
+  58 [   min_tls_version                 = each.value.min_tls_version != null ? each.value.min_tls_version : local.default_min_tls_version
+  59   }
+────────────────────────────────────────
+
+
+CRITICAL: Storage account uses an insecure TLS version.
+════════════════════════════════════════
+Azure Storage currently supports three versions of the TLS protocol: 1.0, 1.1, and 1.2. 
+
+Azure Storage uses TLS 1.2 on public HTTPS endpoints, but TLS 1.0 and TLS 1.1 are still supported for backward compatibility.
+
+This check will warn if the minimum TLS is not set to TLS1_2.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0011
+────────────────────────────────────────
+ terraform/optional-testing/modules/storage/main.tf:58
+────────────────────────────────────────
+  48   resource "azurerm_storage_account" "storeacc" {
+  ..   
+  58 [   min_tls_version                 = each.value.min_tls_version != null ? each.value.min_tls_version : local.default_min_tls_version
+  59   }
+────────────────────────────────────────
+
+
+
+torivar.com/resources/vmtemplate/azuredeploy.json (azure-arm)
+=============================================================
+Tests: 6 (SUCCESSES: 4, FAILURES: 2, EXCEPTIONS: 0)
+Failures: 2 (UNKNOWN: 0, LOW: 0, MEDIUM: 0, HIGH: 1, CRITICAL: 1)
+
+HIGH: Account does not enforce HTTPS.
+════════════════════════════════════════
+You can configure your storage account to accept requests from secure connections only by setting the Secure transfer required property for the storage account. 
+
+When you require secure transfer, any requests originating from an insecure connection are rejected. 
+
+Microsoft recommends that you always require secure transfer for all of your storage accounts.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0008
+────────────────────────────────────────
+ torivar.com/resources/vmtemplate/azuredeploy.json:161
+────────────────────────────────────────
+   1   {
+   .   
+ 161 [             "properties": {}
+ ...   
+ 350   }
+────────────────────────────────────────
+
+
+CRITICAL: Storage account uses an insecure TLS version.
+════════════════════════════════════════
+Azure Storage currently supports three versions of the TLS protocol: 1.0, 1.1, and 1.2. 
+
+Azure Storage uses TLS 1.2 on public HTTPS endpoints, but TLS 1.0 and TLS 1.1 are still supported for backward compatibility.
+
+This check will warn if the minimum TLS is not set to TLS1_2.
+
+See https://avd.aquasec.com/misconfig/avd-azu-0011
+────────────────────────────────────────
+ torivar.com/resources/vmtemplate/azuredeploy.json:161
+────────────────────────────────────────
+   1   {
+   .   
+ 161 [             "properties": {}
+ ...   
+ 350   }
+────────────────────────────────────────
+
+
+

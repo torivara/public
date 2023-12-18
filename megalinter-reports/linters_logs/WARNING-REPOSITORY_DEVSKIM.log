@@ -1,0 +1,137 @@
+Results of devskim linter (version 1.0.18)
+See documentation on https://megalinter.io/7.3.0/descriptors/repository_devskim/
+-----------------------------------------------
+
+❌ [ERROR] for workspace /github/workspace
+Linter raw log:
+git version 2.38.5
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+fatal: detected dubious ownership in repository at '.git'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory .git
+{"$schema":"https://www.schemastore.org/schemas/json/sarif-2.1.0.json","version":"2.1.0","runs":[{"tool":{"driver":{"name":"devskim","fullName":"Microsoft DevSkim Command Line Interface","version":"1.0.18+fba56c26b8","informationUri":"https://github.com/microsoft/DevSkim/","rules":[{"id":"DS104456","name":"UseOfRestrictedFunctions","fullDescription":{"text":"Use of restricted functions.: Use of restricted functions."},"help":{"text":"Use of restricted functions.","markdown":"Visit [https://github.com/Microsoft/DevSkim/blob/main/guidance/DS104456.md](https://github.com/Microsoft/DevSkim/blob/main/guidance/DS104456.md) for guidance on this issue."},"shortDescription":{"text":"Use of restricted functions."},"defaultConfiguration":{"level":"error"},"helpUri":"https://github.com/Microsoft/DevSkim/blob/main/guidance/DS104456.md","properties":{"DevSkimSeverity":"Important","DevSkimConfidence":"Unspecified"}}]}},"versionControlProvenance":[{"repositoryUri":"https://github.com/torivara/public","revisionId":"73fc4e5b382ec15874750348b000fb05c66e4392","branch":"(no branch)"}],"results":[{"ruleId":"DS104456","level":"error","message":{"text":"Use of restricted functions."},"locations":[{"physicalLocation":{"artifactLocation":{"uri":"torivar.com/resources/powershell.ps1"},"region":{"startLine":16,"startColumn":19,"endLine":16,"endColumn":57,"charOffset":622,"charLength":38,"snippet":{"text":"System.Runtime.InteropServices.Marshal","rendered":{"text":"System.Runtime.InteropServices.Marshal","markdown":"`System.Runtime.InteropServices.Marshal`"}},"sourceLanguage":"powershell"}}}],"properties":{"tags":["Implementation.Scripting.PowerShell.DangeousFunction"],"DevSkimSeverity":"Important","DevSkimConfidence":"Unspecified"}},{"ruleId":"DS104456","level":"error","message":{"text":"Use of restricted functions."},"locations":[{"physicalLocation":{"artifactLocation":{"uri":"torivar.com/resources/powershell.ps1"},"region":{"startLine":15,"startColumn":9,"endLine":15,"endColumn":47,"charOffset":531,"charLength":38,"snippet":{"text":"System.Runtime.InteropServices.Marshal","rendered":{"text":"System.Runtime.InteropServices.Marshal","markdown":"`System.Runtime.InteropServices.Marshal`"}},"sourceLanguage":"powershell"}}}],"properties":{"tags":["Implementation.Scripting.PowerShell.DangeousFunction"],"DevSkimSeverity":"Important","DevSkimConfidence":"Unspecified"}}],"columnKind":"utf16CodeUnits"}]}
+
