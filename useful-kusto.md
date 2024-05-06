@@ -1,11 +1,61 @@
 # Some useful Kusto queries
 
+## Resource Graph
+
+### Find disconnected private endpoints
+
+```kusto
+resources
+| where type == "microsoft.network/privateendpoints"
+| extend connections = properties.privateLinkServiceConnections
+| extend status = connections[0].properties.privateLinkServiceConnectionState.status
+| where status == "Disconnected"
+| project name, id, status
+```
+
+### Find custom role assignments on specific role
+
+```kusto
+AuthorizationResources
+| where type =~ 'microsoft.authorization/roleassignments'
+| extend id = properties.roleDefinitionId
+| extend scope = properties.scope
+| where id == "/providers/Microsoft.Authorization/RoleDefinitions/<roleId>"
+```
+
+### Find all role assignments
+
+[ref](https://learn.microsoft.com/nb-no/azure/role-based-access-control/troubleshoot-limits?tabs=default#solution-2---remove-redundant-role-assignments)
+
+```kusto
+authorizationresources
+| where type =~ "microsoft.authorization/roleassignments"
+| where id startswith "/subscriptions"
+| extend RoleDefinitionId = tolower(tostring(properties.roleDefinitionId))
+| extend PrincipalId = tolower(properties.principalId)
+| extend RoleDefinitionId_PrincipalId = strcat(RoleDefinitionId, "_", PrincipalId)
+| join kind = leftouter (
+  authorizationresources
+  | where type =~ "microsoft.authorization/roledefinitions"
+  | extend RoleDefinitionName = tostring(properties.roleName)
+  | extend rdId = tolower(id)
+  | project RoleDefinitionName, rdId
+) on $left.RoleDefinitionId == $right.rdId
+| summarize count_ = count(), Scopes = make_set(tolower(properties.scope)) by RoleDefinitionId_PrincipalId,RoleDefinitionName
+| project RoleDefinitionId = split(RoleDefinitionId_PrincipalId, "_", 0)[0], RoleDefinitionName, PrincipalId = split(RoleDefinitionId_PrincipalId, "_", 1)[0], count_, Scopes
+| where count_ > 0
+| order by count_ desc
+| order by ['RoleDefinitionName'] asc
+```
+
+## Log Analytics
+
 - [IPv4 addresses index operator](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/datatypes-string-operators#operators-on-ipv4-addresses)
 - [Query best practices](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/best-practices)
 
-## Azure Firewall
+### Azure Firewall
 
-### All traffic
+#### All traffic
 
 [Source](https://gist.github.com/marknettle/13fd0c49fe9eeb400572b279790f78bf)
 
@@ -30,7 +80,7 @@ AzureDiagnostics
 | project TimeGenerated,Category,proto,src_host,src_port,dest_host,dest_port,action,rule_coll,rule,reason,msg_s
 ```
 
-### Denied traffic from specified host
+#### Denied traffic from specified host
 
 This excludes dns proxy traffic to reduce result noise.
 
@@ -56,7 +106,7 @@ AzureDiagnostics
 | project TimeGenerated,Category,proto,src_host,src_port,dest_host,dest_port,action,rule_coll,rule,reason,msg_s
 ```
 
-### Denied traffic to specified fqdn from specified host
+#### Denied traffic to specified fqdn from specified host
 
 This excludes dns proxy traffic to reduce result noise.
 
@@ -82,7 +132,7 @@ AzureDiagnostics
 | project TimeGenerated,Category,proto,src_host,src_port,dest_host,dest_port,action,rule_coll,rule,reason,msg_s
 ```
 
-## Advanced firewall search
+### Advanced firewall search
 
 Filters the result before parsing, which saves execution time.
 
@@ -141,7 +191,7 @@ AzureDiagnostics
 | project msg_original,TimeGenerated,Protocol,SourceIP,SourcePort,Target,TargetPort,URL,Action, NatDestination, OperationName,ThreatIntel,IDSSignatureID,IDSSignatureDescription,IDSPriority,IDSClassification,Policy,RuleCollectionGroup,RuleCollection,Rule,WebCategory
 ```
 
-## Log Analytics Cost and Usage
+### Log Analytics Cost and Usage
 
 [Source](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/analyze-usage)
 
@@ -155,7 +205,7 @@ find where TimeGenerated between(startofday(ago(1d))..startofday(now())) project
 | sort by BillableDataBytes desc nulls last
 ```
 
-### Billable data volume by solution over the past month
+#### Billable data volume by solution over the past month
 
 ```kusto
 Usage 
@@ -166,7 +216,7 @@ Usage
 | render columnchart
 ```
 
-### Billable data volume by solution and type over the past month
+#### Billable data volume by solution and type over the past month
 
 ```kusto
 Usage 
@@ -177,11 +227,11 @@ Usage
 | sort by Solution asc, DataType asc
 ```
 
-## Application Gateway with Web Application Firewall
+### Application Gateway with Web Application Firewall
 
 [Source](https://learn.microsoft.com/en-us/azure/application-gateway/log-analytics)
 
-### Fairly quick WAF block or matched summary
+#### Fairly quick WAF block or matched summary
 
 ```kusto
 AzureDiagnostics 
@@ -191,7 +241,7 @@ AzureDiagnostics
 | summarize count() by ruleGroup_s, ruleId_s, requestUri_s, Message, hostname_s
 ```
 
-### Matched rules for hostname by rule group and id (for WAF exclusion) last day
+#### Matched rules for hostname by rule group and id (for WAF exclusion) last day
 
 ```kusto
 AzureDiagnostics
@@ -202,7 +252,7 @@ AzureDiagnostics
 | distinct ruleGroup_s, ruleId_s
 ```
 
-### All traffic for hostname last day
+#### All traffic for hostname last day
 
 ```kusto
 AzureDiagnostics
@@ -210,7 +260,7 @@ AzureDiagnostics
 | where ResourceType == "APPLICATIONGATEWAYS" and hostname_s == "contoso.com"
 ```
 
-### All blocked traffic for hostname last day
+#### All blocked traffic for hostname last day
 
 ```kusto
 AzureDiagnostics
@@ -219,7 +269,7 @@ AzureDiagnostics
 | where action_s == "Matched"
 ```
 
-### Matched/Blocked requests by IP
+#### Matched/Blocked requests by IP
 
 ```kusto
 AzureDiagnostics
@@ -228,7 +278,7 @@ AzureDiagnostics
 | render timechart
 ```
 
-### Matched/Blocked requests by URI
+#### Matched/Blocked requests by URI
 
 ```kusto
 AzureDiagnostics
@@ -237,7 +287,7 @@ AzureDiagnostics
 | render timechart
 ```
 
-### Top matched rules
+#### Top matched rules
 
 ```kusto
 AzureDiagnostics
@@ -247,7 +297,7 @@ AzureDiagnostics
 | render timechart
 ```
 
-### Top five matched rule groups
+#### Top five matched rule groups
 
 ```kusto
 AzureDiagnostics
@@ -257,7 +307,7 @@ AzureDiagnostics
 | render piechart
 ```
 
-### Failed requests pr hour
+#### Failed requests pr hour
 
 ```kusto
 AzureDiagnostics
