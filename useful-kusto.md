@@ -13,6 +13,28 @@ resources
 | project name, id, status
 ```
 
+### List target subresources in your environment
+
+```kusto
+resources
+| where type == "microsoft.network/privateendpoints"
+| extend connections = properties.privateLinkServiceConnections
+| extend subresource = tostring(connections[0].properties.groupIds[0])
+| distinct subresource
+```
+
+### Find specific subresources in your environment (OpenAI Account in this example)
+
+```kusto
+resources
+| where type == "microsoft.network/privateendpoints"
+| extend connections = properties.privateLinkServiceConnections
+| extend status = connections[0].properties.privateLinkServiceConnectionState.status
+| extend subresource = connections[0].properties.groupIds[0]
+| where subresource == "account"
+| project name, id, status, subresource
+```
+
 ### Find custom role assignments on specific role
 
 ```kusto
