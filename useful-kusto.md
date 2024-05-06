@@ -25,6 +25,8 @@ resources
 
 ### Find specific subresources in your environment (OpenAI Account in this example)
 
+[More info on subresources for private endpoints](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview#private-link-resource)
+
 ```kusto
 resources
 | where type == "microsoft.network/privateendpoints"
