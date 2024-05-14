@@ -69,15 +69,13 @@ resource "azapi_resource" "custom_tables" {
   name      = each.key
   parent_id = azurerm_log_analytics_workspace.workspace.id
   type      = "Microsoft.OperationalInsights/workspaces/tables@2022-10-01"
-  body = jsonencode(
-    {
-      "properties" : {
-        "schema" : each.value.schema,
-        "retentionInDays" : each.value.retention_in_days,
-        "totalRetentionInDays" : each.value.total_retention_in_days
-      }
+  body = {
+    properties = {
+      schema = each.value.schema,
+      retentionInDays = each.value.retention_in_days,
+      totalRetentionInDays = each.value.total_retention_in_days
     }
-  )
+  }
 }
 
 resource "azurerm_monitor_data_collection_endpoint" "custom_tables_dce" {
