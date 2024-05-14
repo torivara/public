@@ -71,8 +71,8 @@ resource "azapi_resource" "custom_tables" {
   type      = "Microsoft.OperationalInsights/workspaces/tables@2022-10-01"
   body = {
     properties = {
-      schema = each.value.schema,
-      retentionInDays = each.value.retention_in_days,
+      schema               = each.value.schema
+      retentionInDays      = each.value.retention_in_days
       totalRetentionInDays = each.value.total_retention_in_days
     }
   }
