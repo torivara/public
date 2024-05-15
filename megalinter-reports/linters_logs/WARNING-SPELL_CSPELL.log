@@ -1,0 +1,114 @@
+Results of cspell linter (version 6.31.3)
+See documentation on https://megalinter.io/7.3.0/descriptors/spell_cspell/
+-----------------------------------------------
+
+❌ [ERROR] for workspace /github/workspace
+Linter raw log:
+1/5 ./.mega-linter.yml 2996.50ms X
+.mega-linter.yml:7:5       - Unknown word (TEKTON)     -- - TEKTON
+	 Suggestions: [TESTON, TEUTON, TETON, Teuton, Teton]
+.mega-linter.yml:9:16      - Unknown word (GITLEAKS)   -- - REPOSITORY_GITLEAKS
+	 Suggestions: [GITLENS, GISELA'S, Gisela's, GIFTLESS, GITTERNS]
+.mega-linter.yml:10:16     - Unknown word (KICS)       -- - REPOSITORY_KICS
+	 Suggestions: [KICK, KICKS, KI'S, KIDS, KINS]
+.mega-linter.yml:11:16     - Unknown word (TRUFFLEHOG) -- - REPOSITORY_TRUFFLEHOG
+	 Suggestions: [TRUFFLE'S, TRUFFLED, TRUFFLES, TRUFFLE]
+.mega-linter.yml:14:12     - Unknown word (PYRIGHT)    -- - PYTHON_PYRIGHT
+	 Suggestions: [PLIGHT, ALRIGHT, SPRIGHT, UPRIGHT, ARIGHT]
+.mega-linter.yml:15:16     - Unknown word (DEVSKIM)    -- - REPOSITORY_DEVSKIM
+	 Suggestions: [NEVSKI, Nevski, DEVILKIN, DEISTIC, DESKILL]
+.mega-linter.yml:16:16     - Unknown word (GRYPE)      -- - REPOSITORY_GRYPE
+	 Suggestions: [GRAPE, GRIPE, GROPE, GREP, GYRE]
+.mega-linter.yml:17:16     - Unknown word (SEMGREP)    -- - REPOSITORY_SEMGREP
+	 Suggestions: [SEMPRE, SEGRE, Segre, DEMIREP, EGREP]
+.mega-linter.yml:19:16     - Unknown word (TRIVY)      -- - REPOSITORY_TRIVY
+	 Suggestions: [PRIVY, TRIVIA, TRIVET, TRIAD, TRIAL]
+.mega-linter.yml:21:15     - Unknown word (TERRASCAN)  -- - TERRAFORM_TERRASCAN
+	 Suggestions: [TERRACE, ETRUSCAN, TERRANCE, TERRAMYCIN, Terrance]
+.mega-linter.yml:22:15     - Unknown word (TFLINT)     -- - TERRAFORM_TFLINT
+	 Suggestions: [TSLINT, FLINT, Flint, TILING, TXLIST]
+.mega-linter.yml:24:11     - Unknown word (PROSELINT)  -- - SPELL_PROSELINT
+	 Suggestions: [MORSELING, HORSEMINT, PROSELYTING, PROSELYTE, PROSERPINA]
+2/5 ./9ae7fe80-3355-4343-8e6c-24f3abb3e572-megalinter_file_names_cspell.txt 175.53ms X
+9ae7fe80-3355-4343-8e6c-24f3abb3e572-megalinter_file_names_cspell.txt:3:20      - Unknown word (appservice) -- terraform insecure appservice main
+	 Suggestions: [apprentice, disservice, service]
+3/5 ./deploy.json 988.69ms X
+deploy.json:7:27      - Unknown word (storageaccount) -- "defaultValue": "rg-storageaccount"
+	 Suggestions: []
+deploy.json:11:24     - Unknown word (westeurope)     -- "defaultValue": "westeurope"
+	 Suggestions: []
+deploy.json:16:24     - Unknown word (asdstorage)     -- "defaultValue": "asdstorage"
+	 Suggestions: [storage, Storage]
+4/5 ./terraform/insecure/appservice/main.tf 759.38ms X
+terraform/insecure/appservice/main.tf:1:11      - Unknown word (azurerm)    -- provider "azurerm" {
+	 Suggestions: [azures, azure, azure's, azores, Azores]
+terraform/insecure/appservice/main.tf:5:11      - Unknown word (azurerm)    -- resource "azurerm_resource_group" "rg
+	 Suggestions: [azures, azure, azure's, azores, Azores]
+terraform/insecure/appservice/main.tf:7:15      - Unknown word (norwayeast) -- location = "norwayeast"
+	 Suggestions: [norway's, Norway's, northeast, Northeast]
+terraform/insecure/appservice/main.tf:10:11     - Unknown word (azurerm)    -- resource "azurerm_service_plan" "plan
+	 Suggestions: [azures, azure, azure's, azores, Azores]
+terraform/insecure/appservice/main.tf:11:25     - Unknown word (azurerm)    -- location = azurerm_resource_group.rg.location
+	 Suggestions: [azures, azure, azure's, azores, Azores]
+terraform/insecure/appservice/main.tf:14:25     - Unknown word (azurerm)    -- resource_group_name = azurerm_resource_group.rg.name
+	 Suggestions: [azures, azure, azure's, azores, Azores]
+5/5 ./terraform/optional-testing/modules/storage/main.tf 332.61ms X
+terraform/optional-testing/modules/storage/main.tf:5:5       - Unknown word (azurerm)    -- azurerm = {
+	 Suggestions: [azures, azure, azure's, azores, Azores]
+terraform/optional-testing/modules/storage/main.tf:6:28      - Unknown word (azurerm)    -- source = "hashicorp/azurerm"
+	 Suggestions: [azures, azure, azure's, azores, Azores]
+terraform/optional-testing/modules/storage/main.tf:12:11     - Unknown word (azurerm)    -- provider "azurerm" {
+	 Suggestions: [azures, azure, azure's, azores, Azores]
+terraform/optional-testing/modules/storage/main.tf:17:45     - Unknown word (azurerm)    -- group_name = azurerm_resource_group.default
+	 Suggestions: [azures, azure, azure's, azores, Azores]
+terraform/optional-testing/modules/storage/main.tf:18:46     - Unknown word (norwayeast) -- = "norwayeast"
+	 Suggestions: [norway's, Norway's, northeast, Northeast]
+terraform/optional-testing/modules/storage/main.tf:27:11     - Unknown word (azurerm)    -- resource "azurerm_resource_group" "default
+	 Suggestions: [azures, azure, azure's, azores, Azores]
+terraform/optional-testing/modules/storage/main.tf:28:15     - Unknown word (norwayeast) -- location = "norwayeast"
+	 Suggestions: [norway's, Norway's, northeast, Northeast]
+terraform/optional-testing/modules/storage/main.tf:48:37     - Unknown word (storeacc)   -- azurerm_storage_account" "storeacc" {
+	 Suggestions: [storeyed, store's, storedi, storeys, stored]
+CSpell: Files checked: 5, Issues found: 30 in 5 files
+
+
+You can skip this misspellings by defining the following .cspell.json file at the root of your repository
+Of course, please correct real typos before :)
+
+{
+    "version": "0.2",
+    "language": "en",
+    "ignorePaths": [
+        "**/node_modules/**",
+        "**/vscode-extension/**",
+        "**/.git/**",
+        "**/.pnpm-lock.json",
+        ".vscode",
+        "package-lock.json",
+        "megalinter-reports"
+    ],
+    "words": [
+        "DEVSKIM",
+        "GITLEAKS",
+        "GRYPE",
+        "KICS",
+        "PROSELINT",
+        "PYRIGHT",
+        "SEMGREP",
+        "TEKTON",
+        "TERRASCAN",
+        "TFLINT",
+        "TRIVY",
+        "TRUFFLEHOG",
+        "appservice",
+        "asdstorage",
+        "azurerm",
+        "norwayeast",
+        "storageaccount",
+        "storeacc",
+        "westeurope"
+    ]
+}
+
+
+You can also copy-paste megalinter-reports/.cspell.json at the root of your repository

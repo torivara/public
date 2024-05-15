@@ -21,7 +21,7 @@ locals {
   default_account_replication_type        = "LRS"
   default_enable_https_traffic_only       = true
   default_allow_nested_items_to_be_public = false
-  default_min_tls_version                 = "TLS1_2"
+  default_min_tls_version                 = "TLS1_1"
 }
 
 resource "azurerm_resource_group" "default" {
@@ -57,5 +57,3 @@ resource "azurerm_storage_account" "storeacc" {
   allow_nested_items_to_be_public = each.value.allow_nested_items_to_be_public != null ? each.value.allow_nested_items_to_be_public : local.default_allow_nested_items_to_be_public
   min_tls_version                 = each.value.min_tls_version != null ? each.value.min_tls_version : local.default_min_tls_version
 }
-
-# trigger
