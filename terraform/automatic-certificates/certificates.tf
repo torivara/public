@@ -1,10 +1,10 @@
 locals {
   certificates = {
     demo-kverulant-no = {
-      subject = "CN=demo.kverulant.no"
+      subject = "CN=demo.contoso.com"
       alternative_dns_names = [
-        "demo.kverulant.no",
-        "kverulant.no"
+        "demo.contoso.com",
+        "contoso.com"
       ]
     }
   }
@@ -15,86 +15,6 @@ locals {
   stored_csr  = { for k, v in azurerm_key_vault_secret.csr_storage : k => v.value }
   csr_lookup  = merge(local.stored_csr, local.pending_csr)
 }
-
-# Create certificates logic
-# 1. Create Key Vault certificate for each certificate in the local.certificates map.
-#    This will create a CSR in the Key Vault, also called a pending certificate.
-# 2. Get the csr with bash in a local-exec provisioner.
-#    The bash script will output the CSR in json format to be consumed as a property in the merge step.
-# 3. Use acme_provider to sign the CSR and create a signed certificate.
-# 4. Merge the signed certificate with the CSR using a local-exec provisioner.
-#    When the signed certificate is merged, the certificate will be available in the key vault.
-# 5. Use the key vault certificate in APIM.
-
-# Renew certificates logic
-# 1. Use a time_rotating resource to trigger the certificate rotation every 2 hours during development.
-#    In production, this should be set to a longer interval, such as 14 days.
-# 2. The null_resource.rotate_certificates_trigger will trigger the certificate rotation.
-# 3. The azurerm_key_vault_certificate.certificates resource will be replaced when the trigger is activated.
-# 4. The acme_certificate.certificates resource will be replaced when the trigger is activated.
-# 5. The null_resource.merge_pending_certificates will be triggered to merge the signed certificate with the CSR.
-# 6. The azurerm_key_vault_secret.csr_storage resource will be replaced when the trigger is activated.
-# 7. The azurerm_key_vault_certificate.certificates resource will be replaced when the trigger is activated.
-# 8. The Api Management service will use the updated Key Vault certificate when it automatically refreshes its certificates.
-
-##############################################################
-# Manual tools for managing certificates in terraform backend
-# Uncomment these resources to use them, and add a suitable
-# trigger to the null_resource to run them.
-##############################################################
-
-# Remove pending certificates in Key Vault
-# Uncomment this resource if you need to remove all pending certificates.
-# resource "null_resource" "remove_pending_csr" {
-#   for_each = toset(["wildcard.kverulant.no"])
-#   # trigger every time to delete all pending certificates
-#   triggers = {
-#     value = "manual run once"
-#   }
-#   provisioner "local-exec" {
-#     command = "${local.script_path}/delete_pending.sh"
-#     environment = {
-#       CERTIFICATE_NAME = each.key
-#       KEY_VAULT_NAME   = module.avm-res-keyvault-vault.name
-#     }
-#   }
-# }
-
-# Recover deleted certificate in Key Vault
-# Uncomment this resource if you need to recover a deleted certificate.
-# Make sure to replace <kv_certificate_name> with the actual name of the certificate you want to recover.
-# resource "null_resource" "recover_deleted_certificate" {
-#   triggers = {
-#     value = "run only once"
-#   }
-#   provisioner "local-exec" {
-#     command = <<SCRIPT
-#     az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" --tenant "$ARM_TENANT_ID" --output none
-#     az keyvault certificate recover --subscription ${data.azurerm_subscription.current.subscription_id} --vault-name ${module.avm-res-keyvault-vault.name} --name <certificate_name>
-#     echo "Certificate xx has been recovered."
-#     SCRIPT
-#   }
-# }
-# Print the CSR to console for debugging purposes
-# This resource outputs the CSR to the console for debugging purposes.
-# This is useful during development to see the CSR that will be signed.
-# resource "null_resource" "print_csr" {
-#   for_each = { for k, v in data.external.get_csr : k => v }
-#   # trigger every time during development
-#   triggers = {
-#     value = timestamp()
-#   }
-#   provisioner "local-exec" {
-#     command = "${local.script_path}/output_csr_to_console.sh"
-#     environment = {
-#       CERTIFICATE_NAME = each.key
-#       KEY_VAULT_NAME   = module.avm-res-keyvault-vault.name
-#     }
-#   }
-#   depends_on = [
-#     azurerm_key_vault_certificate.certificates
-#   ]
-# }
 
 # Get the CSR from Key Vault and output it in valid json format
 data "external" "get_csr" {
